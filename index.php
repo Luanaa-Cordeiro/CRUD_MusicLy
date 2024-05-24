@@ -12,20 +12,20 @@
 </head>
 <body>
 
-<form method ="POST" class=" form_php space-y-4 md:space-y-6" action="./login/php/infos.php" data-parsley-validate>
+<form method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./login/php/infos.php" data-parsley-validate>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
     <div class="row border rounded-5 bg-white shadow box-area">
 
     <?php 
         if(isset($_GET['success'])) {
-            echo '<div class="alerta alert alert-dismissible">
+            echo '<div style="color:#04a119;" class="alerta alert alert-dismissible">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Sucesso!</strong> O usuário foi cadastrado
             </div>
             ';
         } elseif(isset($_GET['incorreto'])){
-            echo '<div class="alerta alert alert-dismissible">
+            echo '<div style="color:#be0505;" class="alerta alert alert-dismissible">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Tente novamente!</strong> Usuário ou senha incorretos
             </div>
@@ -38,33 +38,33 @@
                     <h2>Entre no Musicly</h2>
                     <p>Faça seu login!</p>
                 </div>
-                <div class=" mb-4 d-flex flex-column">
+                <div id ="input_usuario" class=" d-flex flex-column">
                     <label for="usuario" class="mb-2 fs-6 fw-medium text-gray-900">Usuário</label>
                     <input name="usuario" id="usuario" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Usuário"  required>
 
                 </div>
-                <div class="mb-4 d-flex flex-column">
+                <div id ="input_senha" class="d-flex flex-column">
                     <label for="senha" class="mb-2 fs-6 fw-medium text-gray-900">Senha</label>
-                    <input name="senha" id="password" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Senha" style="width: 300px; @media only screen and (max-width: 768px){width: 100px}" required>
+                    <input name="senha" id="password" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Senha" required>
                 </div>
-                <div class="input-group mb-5 d-flex justify-content-between">
+                <div id ="senha_esqueceu" class="input-group  d-flex justify-content-between">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="formCheck" onclick="show()">
                         <label for="formCheck" class="form-check-label text-secondary"><small>Exibir senha</small></label>
-                        <small><a href="#" class="forgot_senha">Esqueceu a senha?</a></small>
+                        <small><a style="color: #66276A;" id = "senha" href="#" class="forgot_senha">Esqueceu a senha?</a></small>
                     </div>
 
                 </div>
-                <div class="mb-4">
+                <div class="mb-3">
                     <button class="btn btn-lg fs-6 botao" id="botao">Entrar</button>
                 </div>
 
                 
                 <div class="input-group mb-4">
-                    <button class="btn btn-lg btn-light fs-6" style="width: 300px;" ><img src="./assets/pesquisa.png" style="width:20px" class="me-2"><small>Inscreva-se com o google</small></button>
+                    <button class="btn btn-lg btn-light fs-6" id = "google"><img src="./assets/pesquisa.png" style="width:20px" class="me-2"><small><a style="text-decoration: none; color: black;" href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.google.com%2F%3Fptid%3D19027681%26ptt%3D8%26fpts%3D0&ec=futura_hpp_co_si_001_p&ifkv=AaSxoQygX15hbEW-3BFAxaw3IL7C4UYBvnwYyw4aEEUgroG-xbeHy-zTAMBggny3QbaviRRCS-XbNw&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-888448138%3A1716486336838452&ddm=0">Entre com o google</a></small></button>
                 </div>
                 <div class="row">
-                    <small>Não tem uma conta? <a href="./login/criar.php">Criar</a></small>
+                    <small>Não tem uma conta? <a style="color: #66276A;" href="./login/criar.php">Criar</a></small>
                 </div>
         </div>
     </div> 

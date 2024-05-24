@@ -15,8 +15,8 @@ if(isset($_POST["usuario"]) && isset($_POST["senha"]) && !empty($_POST["usuario"
                 $dado = $resultado->fetch();
 
                 $_SESSION["id_info"] = $dado["id_info"];
-
-                header("Location: ../../pag_crud/navbar.php");
+                $_SESSION["nome"] = $dado["usuario"];
+                header("Location: ../../pag_crud/inicio.php");
             } else{
                 header("Location: ../../index.php?incorreto=erro");
             }

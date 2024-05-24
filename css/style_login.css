@@ -8,9 +8,10 @@ body{
 }
 /*------------ Login container ------------*/
 .box-area{
-    width: 1000px;
-    height: 680px;
-    overflow: hidden;
+    width: 1200px;
+    height: 800px;
+    padding: 20px 75px;
+    margin: 0 10px; 
 }
 /*------------ Right box ------------*/
 .right-box{
@@ -31,14 +32,9 @@ body{
     width: 800px;
 }
 
-.box-area{
-    padding: 20px 50px;
-    margin: 0 10px; 
-}
-
 
 .forgot_senha{
-    margin-left: 80px;
+    margin-left: 50px;
 }
 
 .alerta{
@@ -49,32 +45,48 @@ body{
 }
 
 #usuario{
-    width: 300px;
+    width: 320px;
 }
 
 #password{
-    width: 300px;
+    width: 320px;
 }
 
 #botao{
     background-color: #775584; 
     border-radius: 10px; 
-    width: 300px; 
+    width: 320px; 
     color: white;
+}
+
+#google{
+    width: 320px;
 }
 
 #botao:hover{
     background-color: #66276A;
 }
 
+#senha_esqueceu{
+    margin-bottom: 40px;
+}
+
+#input_usuario{
+    margin-bottom: 25px;
+}
+
+#input_senha{
+    margin-bottom: 20px;
+}
 
 /*------------ For small screens------------*/
 @media only screen and (max-width: 768px){
     .box-area{
-        width: 800px;
-        height: 610px;
+        width: 750px;
+        height: 740px;
         padding: 20px 15px;
         margin: 0 10px; 
+        
     }
     .left-box{
         height: 0px;
@@ -94,6 +106,45 @@ body{
     
     #password{
         width: 300px;
+    }
+
+    #google{
+        width: 300px;
+    }
+    
+
+    #botao{
+        background-color: #775584; 
+        border-radius: 10px; 
+        width: 300px; 
+        color: white;
+        padding: 10px 0;
+    }
+
+    .senha{
+        font-size: 15px;
+    }
+
+    .alerta{
+        width: 100px; 
+        font-size: 15px;
+        height: 0;
+        padding: 0;
+
+    }
+
+    #senha_esqueceu{
+        margin-bottom: 40px;
+    }
+
+    #input_usuario{
+        margin-bottom: 20px;
+    }
+
+    
+
+    .forgot_senha{
+        margin-left: 25px;
     }
 }
 
