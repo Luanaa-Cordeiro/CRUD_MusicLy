@@ -79,7 +79,64 @@ body{
     margin-bottom: 20px;
 }
 
-/*------------ For small screens------------*/
+@media only screen and (max-width: 1400px){
+    .box-area{
+        width: 900px;
+        height: 600px;
+        padding: 5px 75px;
+        margin: 0 10px; 
+    }
+
+    .forgot_senha{
+        margin-left: 60px;
+    }
+    
+    .alerta{
+        width: 100px; 
+        text-align: center; 
+        height: 0;
+        padding: 0;
+    }
+    
+    #usuario{
+        width: 280px;
+    }
+    
+    #password{
+        width: 280px;
+    }
+    
+    #botao{
+        background-color: #775584; 
+        border-radius: 10px; 
+        width: 280px; 
+        color: white;
+    }
+    
+    #google{
+        width: 280px;
+    }
+    
+    #botao:hover{
+        background-color: #66276A;
+    }
+    
+    #senha_esqueceu{
+        margin-bottom: 20px;
+    }
+    
+    #input_usuario{
+        margin-bottom: 15px;
+    }
+    
+    #input_senha{
+        margin-bottom: 10px;
+    }
+
+}
+
+
+
 @media only screen and (max-width: 768px){
     .box-area{
         width: 750px;

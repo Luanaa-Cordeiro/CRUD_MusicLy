@@ -21,6 +21,8 @@ body{
     left: 0;
     height: 80px;
     background-color: #775584;
+    display: flex;
+    justify-content: space-between;
 }
 
 .tabela{
@@ -51,7 +53,10 @@ b{
     color: aliceblue;
 }
 
-
+#sair{
+    margin-top: 25px;
+    margin-right: 25px;
+}
 
 .card{
     margin: 0 35px;

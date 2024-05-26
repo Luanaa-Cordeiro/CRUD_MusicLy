@@ -83,6 +83,72 @@ body{
     margin-bottom: 20px;
 }
 
+
+@media only screen and (max-width: 1400px){
+    .box-area{
+        width: 900px;
+        height: 600px;
+        padding: 5px 50px;
+        margin: 0 10px; 
+    }
+
+    .right-box{
+        padding: 20px 0px 0px 0px;
+    }
+
+    .forgot_senha{
+        margin-left: 80px;
+    }
+    
+    .alerta{
+        width: 100px; 
+        text-align: center; 
+        height: 0;
+        padding: 0;
+    }
+    
+    #usuario{
+        width: 280px;
+    }
+    
+    #password{
+        width: 280px;
+    }
+
+    #pass{
+        width: 280px;
+        margin-bottom: 5px; 
+    }
+    
+    #botao{
+        background-color: #775584; 
+        border-radius: 10px; 
+        width: 280px; 
+        color: white;
+    }
+    
+    #google{
+        width: 280px;
+    }
+    
+    #botao:hover{
+        background-color: #66276A;
+    }
+    
+    #senha_esqueceu{
+        margin-bottom: 10px;
+    }
+    
+    #input_usuario{
+        margin-bottom: 5px;
+    }
+    
+    #input_senha{
+        margin-bottom: 5px;
+    }
+
+}
+
 /*------------ For small screens------------*/
 @media only screen and (max-width: 768px){
     .box-area{

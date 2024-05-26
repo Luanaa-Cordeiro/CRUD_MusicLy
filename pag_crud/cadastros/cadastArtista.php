@@ -9,5 +9,5 @@ $resultado = $conn->prepare($sql);
 $resultado -> bindValue(':nome',$nome);
 $resultado->execute();
 
-header("Location: ../navbar.php");
+header("Location: ../tabelaArtista.php");
 }

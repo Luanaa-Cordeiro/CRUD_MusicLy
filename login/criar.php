@@ -45,23 +45,23 @@
                     <h2>Bem-Vindo(a)!</h2>
                     <p>Crie uma conta e começe a curtir!</p>
                 </div>
-                <div id ="input_usuario" class="d-flex flex-column" style="margin-bottom: 15px;">
+                <div id ="input_usuario" class="d-flex flex-column">
                     <label for="usuario" class="mb-2 fs-6 fw-medium text-gray-900">Usuário</label>
                     <input name="usuario" id="usuario" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Usuário" required>
 
                 </div>
-                <div id ="input_senha" class="d-flex flex-column"style="margin-bottom: 15px;">
+                <div id ="input_senha" class="d-flex flex-column">
                     <label for="senha" class="mb-2 fs-6 fw-medium text-gray-900">Senha</label>
                     <input name="senha" id="password" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Senha" required>
                 </div>
-                <div id ="input_confsenha" class="d-flex flex-column" style="margin-bottom: 15px;">
+                <div id ="input_confsenha" class="d-flex flex-column">
                     <label for="confsenha" class="mb-2 fs-6 fw-medium text-gray-900">Confirmar Senha</label>
                     <input name="confsenha" id="pass" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Senha" required>
                 </div>
-                <div id ="senha_esqueceu" class="input-group d-flex justify-content-between" style="margin-bottom: 25px;">
+                <div id ="senha_esqueceu" class="input-group d-flex justify-content-between">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="formCheck" onclick="show()">
-                        <label for="formCheck" class="form-check-label text-secondary"><small>Exibir senha</small></label>
+                        <label for="formCheck" class="form-check-label text-secondary"><small id="exibir">Exibir senha</small></label>
                     </div>
                     
                 </div>

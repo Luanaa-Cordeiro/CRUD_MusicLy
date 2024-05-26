@@ -3,19 +3,20 @@ require('../database/config_art.php');
 session_start();
 
 if(!isset($_SESSION["id_info"])){
-   header("Location: ../index.php");
+    header("Location: ../index.php");
 
+    
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style_inicio.css">
+    <link rel="stylesheet" href="../css/artista.css">
 </head>
 <body>
 
@@ -38,7 +39,6 @@ if(!isset($_SESSION["id_info"])){
                     </div>
   </div>
   
-  
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 navs">
@@ -49,7 +49,7 @@ if(!isset($_SESSION["id_info"])){
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
         
-                            <a href="#" class="nav-link align-middle px-0 d-flex align-items-center">
+                            <a href="inicio.php" class="nav-link align-middle px-0 d-flex align-items-center">
                                 <img src="../assets/casa.png" alt="">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Início</span>
                             </a>
@@ -63,7 +63,7 @@ if(!isset($_SESSION["id_info"])){
                         </li>
     
                         <li>
-                            <a href="tabelaArtista.php" class="nav-link px-0 align-middle">
+                            <a href="#" class="nav-link px-0 align-middle">
                                 <img src="../assets/pessoa.png" alt="">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Artistas</span> 
                             </a>
@@ -76,57 +76,74 @@ if(!isset($_SESSION["id_info"])){
                             </a>
                         </li>
                     </ul>
+                    
                 </div>
             </div>
 
-            <div class="col">
-              
-          <div class="cartas row">
-            <div class="card">
-              <img src="../assets/nota_musical.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Músicas</h5>
-                <p class="card-text">Músicas disponíveis: 0</p>
-                <a href="#" class="btn botao">Exibir</a>
-              </div>
-            </div>
-
-            <div class="card">
-              <img src="../assets/artista.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Artistas</h5>
-                <p class="card-text">Artistas disponíveis: 
-                <?php
-                $sql = "SELECT COUNT(id_artista) AS total_artistas FROM artista";
+            <div class="tabela">
+            <div class="container table-responsive">
+              <div class="titulo">
+              <?php
+                $sql = "SELECT * FROM artista";
                 $resultado = $conn->prepare($sql);
                 $resultado->execute();
-                $artistas = $resultado->fetch(PDO::FETCH_ASSOC);
-                echo $artistas['total_artistas']; 
+                $artistas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                if(count($artistas) > 0){
                 ?>
-                </p>
-                <a href="#" class="btn botao">Exibir</a>
-              </div>
-            </div>
 
-            <div class="card">
-              <img src="../assets/album.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Álbuns</h5>
-                <p class="card-text">Álbuns disponíveis: 0</p>
-                <a href="#" class="btn botao">Exibir</a>
-              </div>
-            </div>
+                <h1>Artistas!</h1>
+                <button class="btn adicionar"><a href="formArtista.php">Adicionar</a></button>
+                </div>
+                <table class="table">
+                  <thead class="">
+                    <tr>
+                      <th style="background-color:#66276A; color:white;">Id</th>
+                      <th style="background-color:#66276A; color:white;"></th>
+                      <th style="background-color:#66276A; color:white;">Nome</th>
+                      <th style="background-color:#66276A; color:white;"></th>
+                      <th style="background-color:#66276A; color:white;"></th>
+                      <th style="background-color:#66276A; color:white;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      foreach($artistas as $artista){
+                        echo "<tr>";
+                        echo "<td>" . $artista['id_artista'] . "<td>";
+                        echo "<td>" . $artista['nome'] . "<td>";
+                        echo "<td>
+                        <form method ='post' action='./deletar/artista.php'>
+                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
+                        <input type='hidden' name='nome' value='" . $artista['nome'] . "'/>
+                        <button class ='btn deletar'>Deletar</button></td>
+                        </form>";
+                        echo "<td>
+                        <form method ='post' action='./atualizar/artista.php'>
+                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
+                        <input type='text' name='nome' placeholder='Novo nome'/>
+                        <button type='submit' class ='btn atualizar'>Atualizar</button>
+                        </form>
+                        </td>";
+                        echo "</tr>";
 
-            <div class="card">
-              <img src="../assets/generos.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Gêneros</h5>
-                <p class="card-text">Gêneros disponíveis: 0</p>
-                <a href="#" class="btn botao">Exibir</a>
+            
+                      }
+                      ?>
+
+                  </tbody>
+                </table>
+                <?php
+        } else{
+          echo "<h1>Artistas!</h1>
+          <button class='btn adicionar'><a href='formArtista.php'>Adicionar</a></button>";
+          echo "Você não tem nenhum produto cadastrado";
+        }
+        ?>
               </div>
             </div>
-           </div>
-          </div>
+        </div>
+    </div>
+</div>
 
 
     
