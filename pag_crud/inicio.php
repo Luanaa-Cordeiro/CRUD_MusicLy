@@ -43,7 +43,7 @@ if(!isset($_SESSION["id_info"])){
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 navs">
               
-                <div id="elementos_nav"class="d-flex flex-column align-items-center align-items-sm-start  text-white min-vh-100">
+                <div id="elementos_nav"class="d-flex flex-column justify-content-center align-items-center align-items-sm-start  text-white min-vh-100">
                   <h4>Musicly</h4>
                     
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -72,7 +72,14 @@ if(!isset($_SESSION["id_info"])){
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
                                 <img src="../assets/vinil.png" alt="">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Playlists</span> 
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Álbuns</span> 
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="tabelaGenero.php" class="nav-link px-0 align-middle">
+                                <img src="../assets/generos.png" alt="">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Gêneros</span> 
                             </a>
                         </li>
                     </ul>
@@ -121,7 +128,15 @@ if(!isset($_SESSION["id_info"])){
               <img src="../assets/generos.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Gêneros</h5>
-                <p class="card-text">Gêneros disponíveis: 0</p>
+                <p class="card-text">Gêneros disponíveis: 
+                <?php
+                $sql = "SELECT COUNT(id_genero) AS total_generos FROM genero";
+                $resultado = $conn->prepare($sql);
+                $resultado->execute();
+                $generos = $resultado->fetch(PDO::FETCH_ASSOC);
+                echo $generos['total_generos']; 
+                ?>  
+                </p>
                 <a href="#" class="btn botao">Exibir</a>
               </div>
             </div>

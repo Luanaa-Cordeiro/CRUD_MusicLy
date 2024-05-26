@@ -1,5 +1,18 @@
 <?php
-require('../database/config_art.php');
+if (isset($_POST["id"]) && isset($_POST["nome"])) {
+    $id_artista = $_POST["id"];
+    $nome_artista = $_POST["nome"];
+
+} else {
+    
+    header("Location: ../tabelaArtista.php");
+    exit(); 
+    
+}
+?>
+
+<?php
+require('../../database/config_art.php');
 session_start();
 
 if(!isset($_SESSION["id_info"])){
@@ -16,7 +29,7 @@ if(!isset($_SESSION["id_info"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/artista.css">
+    <link rel="stylesheet" href="../../css/artista.css">
 </head>
 <body>
 
@@ -24,7 +37,7 @@ if(!isset($_SESSION["id_info"])){
 <hr>
                     <div id="sair" class="dropdown">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../assets/usuario.avif" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <img src="../../assets/usuario.avif" alt="hugenerd" width="30" height="30" class="rounded-circle">
                             <span class="d-none d-sm-inline mx-1">
                             <?php 
                               echo $_SESSION["nome"];
@@ -87,89 +100,28 @@ if(!isset($_SESSION["id_info"])){
                 </div>
             </div>
 
-            <div class="tabela">
-            <div class="container table-responsive">
-              <div class="titulo">
-                
-              <?php
-                $sql = "SELECT * FROM artista";
-                $resultado = $conn->prepare($sql);
-                $resultado->execute();
-                $artistas = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($artistas) > 0){
-                ?>
-                <h1>Artista!</h1>
-                <button class="btn adicionar"><a href="formArtista.php">Adicionar</a></button>
+            <form method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="artista.php" data-parsley-validate>
+                <div class="main">
+                    <div class="formulario shadow">
+
+                    <div class="header-text mb-1 ">
+                        <h2>Adicione um Artista!</h2>
+                    </div>
+
+                    <div id ="input_usuario" class=" d-flex flex-column">
+                    <input type="hidden" id="id" name="id" value="<?php echo $id_artista; ?>"/>
+                    <input type="text" class="form-control form-control-lg bg-light fs-6"id="nome" name="nome" value="<?php echo $nome_artista; ?>"/><br>
+                    </div>
+
+                    <div class="mb-3">
+                        <button id="botao" class="btn" type="submit">Salvar</button>
+                    </div>
+
+                    <p><a href="../tabelaArtista.php">Voltar</a></p>
                 </div>
+                </div>
+        </form>
 
-                <?php
-                    if(isset($_GET['delete'])) {
-                      echo '<div style="color:#04a119;" class="alerta alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> O item foi deletado
-                      </div>
-                      ';
-                    }
-                  ?>
-
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th style="background-color:#66276A; color:white;">Id</th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                      <th style="background-color:#66276A; color:white;">Nome</th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      foreach($artistas as $artista){
-                        echo "<tr>";
-                        echo "<td>" . $artista['id_artista'] . "<td>";
-                        echo "<td>" . $artista['nome'] . "<td>";
-                        echo "<td>
-                        <form method ='post' action='./deletar/artista.php'>
-                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
-                        <input type='hidden' name='nome' value='" . $artista['nome'] . "'/>
-                        <button type='submit' class ='btn deletar'>Deletar</button>
-                        </td>
-                        </form>";
-                        echo "<td>
-                        <form method ='post' action='./atualizar/receberValoresArt.php'>
-                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
-                        <input type='hidden' name='nome' value='" . $artista['nome'] . "'/>
-                        <button type='submit' class ='btn atualizar'>Atualizar</button>
-                        </form>
-                        </td>";
-                        echo "</tr>";
-
-                      }
-                      ?>
-
-                  </tbody>
-                </table>
-                <?php
-        } else{
-          echo"<div class='vazio'>";
-          echo"<div class='titulo_botao'>";
-          echo "<h1>Artistas!</h1>
-          <button class='btn adicionar'><a href='formArtista.php'>Adicionar</a></button>";
-          echo"</div>";
-          echo "<h2>Você não tem nenhum Artista cadastrado!</h2>";
-          echo"</div>";
-        }
-        ?>
-              </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    
- 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

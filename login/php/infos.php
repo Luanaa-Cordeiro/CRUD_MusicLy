@@ -2,8 +2,8 @@
 if(isset($_POST["usuario"]) && isset($_POST["senha"]) && !empty($_POST["usuario"]) && !empty($_POST["senha"])){
             session_start();
             require("../../database/config_log.php");
-            $usuario = $_POST["usuario"];
-            $senha = $_POST["senha"];
+            $usuario = trim($_POST["usuario"]);
+            $senha = trim($_POST["senha"]);
 
             $sql = "SELECT * FROM infos WHERE usuario = :usuario AND senha = :senha";
             $resultado = $conn->prepare($sql);

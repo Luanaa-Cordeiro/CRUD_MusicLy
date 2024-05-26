@@ -10,5 +10,5 @@ if(isset($_POST["id"])){
     $resultado->bindValue(":id_artista", $id_artista);
     $resultado->execute();
 
-    header("Location: ../tabelaArtista.php");
+    header("Location: ../tabelaArtista.php?delete=ok");
 }

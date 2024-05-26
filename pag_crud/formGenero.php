@@ -1,9 +1,8 @@
 <?php
 require('../database/config_art.php');
 session_start();
-
 if(!isset($_SESSION["id_info"])){
-    header("Location: ../index.php");
+    header("Location: ../login/index.php");
 
     
 }
@@ -19,7 +18,6 @@ if(!isset($_SESSION["id_info"])){
     <link rel="stylesheet" href="../css/artista.css">
 </head>
 <body>
-
 <div class="navi">
 <hr>
                     <div id="sair" class="dropdown">
@@ -49,7 +47,7 @@ if(!isset($_SESSION["id_info"])){
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
         
-                            <a href="inicio.php" class="nav-link align-middle px-0 d-flex align-items-center">
+                            <a href="#" class="nav-link align-middle px-0 d-flex align-items-center">
                                 <img src="../assets/casa.png" alt="">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Início</span>
                             </a>
@@ -85,93 +83,29 @@ if(!isset($_SESSION["id_info"])){
                     </ul>
                     
                 </div>
-            </div>
+            </div> 
 
-            <div class="tabela">
-            <div class="container table-responsive">
-              <div class="titulo">
-                
-              <?php
-                $sql = "SELECT * FROM artista";
-                $resultado = $conn->prepare($sql);
-                $resultado->execute();
-                $artistas = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($artistas) > 0){
-                ?>
-                <h1>Artista!</h1>
-                <button class="btn adicionar"><a href="formArtista.php">Adicionar</a></button>
+            <form method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./cadastros/cadastGenero.php" data-parsley-validate>
+                <div class="main">
+                    <div class="formulario shadow">
+
+                    <div class="header-text mb-1 ">
+                        <h2>Adicione um Gênero!</h2>
+                    </div>
+
+                    <div id ="input_usuario" class=" d-flex flex-column">
+                        <label for="nome" class="mb-2 fs-6 fw-medium text-gray-900">Gênero</label>
+                        <input name="nome" id="nome" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Nome" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-lg fs-6" id="botao">Adicionar</button>
+                    </div>
+
+                    <p><a href="tabelaGenero.php">Voltar</a></p>
                 </div>
-
-                <?php
-                    if(isset($_GET['delete'])) {
-                      echo '<div style="color:#04a119;" class="alerta alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> O item foi deletado
-                      </div>
-                      ';
-                    }
-                  ?>
-
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th style="background-color:#66276A; color:white;">Id</th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                      <th style="background-color:#66276A; color:white;">Nome</th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      foreach($artistas as $artista){
-                        echo "<tr>";
-                        echo "<td>" . $artista['id_artista'] . "<td>";
-                        echo "<td>" . $artista['nome'] . "<td>";
-                        echo "<td>
-                        <form method ='post' action='./deletar/artista.php'>
-                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
-                        <input type='hidden' name='nome' value='" . $artista['nome'] . "'/>
-                        <button type='submit' class ='btn deletar'>Deletar</button>
-                        </td>
-                        </form>";
-                        echo "<td>
-                        <form method ='post' action='./atualizar/receberValoresArt.php'>
-                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
-                        <input type='hidden' name='nome' value='" . $artista['nome'] . "'/>
-                        <button type='submit' class ='btn atualizar'>Atualizar</button>
-                        </form>
-                        </td>";
-                        echo "</tr>";
-
-                      }
-                      ?>
-
-                  </tbody>
-                </table>
-                <?php
-        } else{
-          echo"<div class='vazio'>";
-          echo"<div class='titulo_botao'>";
-          echo "<h1>Artistas!</h1>
-          <button class='btn adicionar'><a href='formArtista.php'>Adicionar</a></button>";
-          echo"</div>";
-          echo "<h2>Você não tem nenhum Artista cadastrado!</h2>";
-          echo"</div>";
-        }
-        ?>
-              </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    
- 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+                </div>
+        </form>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

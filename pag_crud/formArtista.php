@@ -73,6 +73,13 @@ if(!isset($_SESSION["id_info"])){
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Playlists</span> 
                             </a>
                         </li>
+
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <img src="../assets/generos.png" alt="">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Gêneros</span> 
+                            </a>
+                        </li>
                     </ul>
                     
                 </div>
@@ -80,7 +87,7 @@ if(!isset($_SESSION["id_info"])){
 
             <form method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./cadastros/cadastArtista.php" data-parsley-validate>
                 <div class="main">
-                    <div class="formulario">
+                    <div class="formulario shadow">
 
                     <div class="header-text mb-1 ">
                         <h2>Adicione um Artista!</h2>
@@ -92,9 +99,10 @@ if(!isset($_SESSION["id_info"])){
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-lg fs-6" id="botao">Entrar</button>
+                        <button type="submit" class="btn btn-lg fs-6" id="botao">Adicionar</button>
                     </div>
 
+                    <p><a href="tabelaArtista.php">Voltar</a></p>
                 </div>
                 </div>
         </form>

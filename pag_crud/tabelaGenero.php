@@ -63,7 +63,7 @@ if(!isset($_SESSION["id_info"])){
                         </li>
     
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
+                            <a href="tabelaArtista.php" class="nav-link px-0 align-middle">
                                 <img src="../assets/pessoa.png" alt="">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Artistas</span> 
                             </a>
@@ -90,18 +90,17 @@ if(!isset($_SESSION["id_info"])){
             <div class="tabela">
             <div class="container table-responsive">
               <div class="titulo">
-                
               <?php
-                $sql = "SELECT * FROM artista";
+                $sql = "SELECT * FROM genero";
                 $resultado = $conn->prepare($sql);
                 $resultado->execute();
-                $artistas = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($artistas) > 0){
+                $generos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                if(count($generos) > 0){
                 ?>
-                <h1>Artista!</h1>
-                <button class="btn adicionar"><a href="formArtista.php">Adicionar</a></button>
-                </div>
 
+                <h1>Gêneros!</h1>
+                <button class="btn adicionar"><a href="formGenero.php">Adicionar</a></button>
+                </div>
                 <?php
                     if(isset($_GET['delete'])) {
                       echo '<div style="color:#04a119;" class="alerta alert alert-dismissible">
@@ -111,7 +110,6 @@ if(!isset($_SESSION["id_info"])){
                       ';
                     }
                   ?>
-
                 <table class="table">
                   <thead class="">
                     <tr>
@@ -125,21 +123,21 @@ if(!isset($_SESSION["id_info"])){
                   </thead>
                   <tbody>
                     <?php
-                      foreach($artistas as $artista){
+                      foreach($generos as $genero){
                         echo "<tr>";
-                        echo "<td>" . $artista['id_artista'] . "<td>";
-                        echo "<td>" . $artista['nome'] . "<td>";
+                        echo "<td>" . $genero['id_genero'] . "<td>";
+                        echo "<td>" . $genero['nome'] . "<td>";
                         echo "<td>
-                        <form method ='post' action='./deletar/artista.php'>
-                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
-                        <input type='hidden' name='nome' value='" . $artista['nome'] . "'/>
+                        <form method ='post' action='./deletar/genero.php'>
+                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
+                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
                         <button type='submit' class ='btn deletar'>Deletar</button>
                         </td>
                         </form>";
                         echo "<td>
-                        <form method ='post' action='./atualizar/receberValoresArt.php'>
-                        <input type='hidden' name='id' value='" . $artista['id_artista'] . "'/>
-                        <input type='hidden' name='nome' value='" . $artista['nome'] . "'/>
+                        <form method ='post' action='./atualizar/receberValoresGen.php'>
+                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
+                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
                         <button type='submit' class ='btn atualizar'>Atualizar</button>
                         </form>
                         </td>";
@@ -154,10 +152,10 @@ if(!isset($_SESSION["id_info"])){
         } else{
           echo"<div class='vazio'>";
           echo"<div class='titulo_botao'>";
-          echo "<h1>Artistas!</h1>
-          <button class='btn adicionar'><a href='formArtista.php'>Adicionar</a></button>";
+          echo "<h1>Gênero!</h1>
+          <button class='btn adicionar'><a href='formGenero.php'>Adicionar</a></button>";
           echo"</div>";
-          echo "<h2>Você não tem nenhum Artista cadastrado!</h2>";
+          echo "<h2>Você não tem nenhum Gênero cadastrado!</h2>";
           echo"</div>";
         }
         ?>

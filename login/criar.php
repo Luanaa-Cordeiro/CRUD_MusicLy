@@ -20,7 +20,7 @@
 <form method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./php/cadastrar.php" data-parsley-validate>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-    <div class="row border rounded-5  bg-white shadow box-area main">
+    <div class="row border mx-5 rounded-5  bg-white shadow box-area main">
 
     <?php 
         if(isset($_GET['senha'])) {

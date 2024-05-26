@@ -15,7 +15,7 @@
 <form method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./login/php/infos.php" data-parsley-validate>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-    <div class="row border rounded-5 bg-white shadow box-area">
+    <div class="row border mx-5 rounded-5 bg-white shadow box-area">
 
     <?php 
         if(isset($_GET['success'])) {

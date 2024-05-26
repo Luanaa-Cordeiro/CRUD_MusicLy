@@ -4,8 +4,9 @@
     
         if(isset($_POST["usuario"]) && isset($_POST["senha"]) && isset($_POST["confsenha"]) && !empty($_POST["usuario"]) && !empty($_POST["senha"]) && !empty($_POST["confsenha"]) && $_POST["senha"] == $_POST["confsenha"]){
             require("../../database/config_log.php");
-            $usuario = $_POST["usuario"];
-            $senha = $_POST["senha"];
+            $usuario = trim($_POST["usuario"]);
+            $senha = trim($_POST["senha"]);
+            $confsenha = trim($_POST["confsenha"]);
 
             $stmt = $conn->prepare('SELECT COUNT(*) FROM infos WHERE usuario = :usuario');
             $stmt->bindParam(':usuario', $usuario);
