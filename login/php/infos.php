@@ -20,4 +20,6 @@ if(isset($_POST["usuario"]) && isset($_POST["senha"]) && !empty($_POST["usuario"
             } else{
                 header("Location: ../../index.php?incorreto=erro");
             }
+    } else{
+        header("Location: ../../index.php?preencha=erro");
     }

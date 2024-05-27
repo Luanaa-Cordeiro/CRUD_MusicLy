@@ -38,6 +38,14 @@
             </div>
             ';
         }
+
+        if (isset($_GET['preencha'])){
+            echo '<div style="color:#be0505;" class="alerta alert alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Preencha todos os campos</strong>
+            </div>
+            ';
+        }
     ?> 
     <div class="col-md-6 right-box">
         <div class="row align-items-center">

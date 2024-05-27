@@ -2,8 +2,11 @@
 
 
     
-        if(isset($_POST["usuario"]) && isset($_POST["senha"]) && isset($_POST["confsenha"]) && !empty($_POST["usuario"]) && !empty($_POST["senha"]) && !empty($_POST["confsenha"]) && $_POST["senha"] == $_POST["confsenha"]){
-            require("../../database/config_log.php");
+        if(isset($_POST["usuario"]) && isset($_POST["senha"]) && isset($_POST["confsenha"]) &&  $_POST["senha"] == $_POST["confsenha"]){
+            if(empty($_POST["usuario"]) || empty($_POST["senha"]) || empty($_POST["confsenha"])){
+                header("Location: ../criar.php?preencha=erro");
+            } else{
+                require("../../database/config_log.php");
             $usuario = trim($_POST["usuario"]);
             $senha = trim($_POST["senha"]);
             $confsenha = trim($_POST["confsenha"]);
@@ -12,6 +15,10 @@
             $stmt->bindParam(':usuario', $usuario);
             $stmt->execute();
             $count = $stmt->fetchColumn();
+            }
+            
+            
+            
 
             if ($count > 0) {
                 header("Location: ../criar.php?usuario=existe");
@@ -28,4 +35,6 @@
         } else {
             header("Location: ../criar.php?senha=erro");
         }
+
+        
     

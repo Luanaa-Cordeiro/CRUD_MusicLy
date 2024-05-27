@@ -68,7 +68,7 @@ body{
 }
 
 #senha_esqueceu{
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 #input_usuario{
@@ -79,7 +79,7 @@ body{
     margin-bottom: 20px;
 }
 
-@media only screen and (max-width: 1400px){
+/*@media only screen and (max-width: 1400px){
     .box-area{
         width: 900px;
         height: 600px;
@@ -134,10 +134,10 @@ body{
     }
 
 }
+*/
 
 
-
-@media only screen and (max-width: 991px){
+@media only screen and (max-width: 996px){
     .box-area{
         width: 750px;
         height: 740px;
