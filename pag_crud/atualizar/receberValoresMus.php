@@ -1,26 +1,27 @@
 <?php
-if (isset($_POST["id"]) && isset($_POST["nome"])) {
-    $id_artista = $_POST["id"];
-    $nome_artista = $_POST["nome"];
-
-} else {
-    
-    header("Location: ../tabelaArtista.php");
-
-    
-}
-?>
-
-<?php
-require('../../database/config_art.php');
 session_start();
 
-if(!isset($_SESSION["id_info"])){
+if (!isset($_SESSION["id_info"])) {
     header("Location: ../index.php");
+    exit;
+}
 
-    
+require('../../database/config_art.php');
+
+if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && isset($_POST["artista"])) {
+    $id_musica = $_POST["id"];
+    $nome_album = $_POST["nome"];
+    $data = $_POST["data"];
+    $artista_nome = $_POST["artista"];
+    $album_nome = $_POST["album"];
+    $genero_nome = $_POST["genero"];
+} else {
+    header("Location: ../tabelaArtista.php");
 }
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +124,7 @@ if(!isset($_SESSION["id_info"])){
             </nav>
 
             <div id="formulario">
-            <form  method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="artista.php" data-parsley-validate>
+            <form  method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="musica.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
           <div id="cadastrar" class="card shadow">
           <?php
@@ -135,17 +136,80 @@ if(!isset($_SESSION["id_info"])){
                       ';
           }
           ?>
-          <span id="titulo_form">Atualize um Artista!</span>
+          <span id="titulo_form">Atualize o Álbum!</span>
             <div class="card-body">
                 <div class="row">
                   <div class=" mb-4">
                     <div id="input_art" class="form-outline">
-                    <input type="hidden" id="id" name="id" value="<?php echo $id_artista; ?>"/>
-                    <label class="form-label" for="form3Example1">Nome</label>
-                    <input type="text" class="form-control form-control-lg bg-light fs-6"id="nome" name="nome" value="<?php echo $nome_artista; ?>"/><br>
-                    </div>
-                  </div>
+                    <div id="input_usuario" class="d-flex flex-column">
+                            <input name="id" type="hidden" class="form-control form-control-lg bg-light fs-6" value="<?php echo $id_musica; ?>" required>
+                            
+                            <label for="nome" class="mb-2 fs-6 fw-medium text-gray-900">Nome</label>
+                            <input name="nome" type="text" class="form-control form-control-lg bg-light fs-6" value="<?php echo $nome_album; ?>" required>
+                            
+                            <label for="data" class="mb-2 fs-6 fw-medium text-gray-900">Data de lançamento</label>
+                            <input name="data" type="date" class="form-control form-control-lg bg-light fs-6" value="<?php echo $data; ?>" required>
 
+                            <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Artista</label>
+                            <select name="artista" id="artista" class="form-control form-control-lg bg-light fs-6" required>
+                                <?php
+                                $sql = "SELECT * FROM artista";
+                                $resultado = $conn->prepare($sql);
+                                $resultado->execute();
+                                $artistas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                                if (count($artistas) > 0) {
+                                    foreach ($artistas as $artista) {
+                                        if($artista['nome'] == $artista_nome){
+                                            $selected = 'selected';
+                                        } else{
+                                            $selected = '';
+                                        }
+                                        echo "<option value='" . $artista['id_artista'] . "' $selected>" . $artista['nome'] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <label for="album" class="mb-2 fs-6 fw-medium text-gray-900">Álbum</label>
+                            <select name="album" id="artista" class="form-control form-control-lg bg-light fs-6" required>
+                                <?php
+                                $sql = "SELECT * FROM album";
+                                $resultado = $conn->prepare($sql);
+                                $resultado->execute();
+                                $albuns = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                                if (count($albuns) > 0) {
+                                    foreach ($albuns as $album) {
+                                        if($album['nome'] == $album_nome){
+                                            $selected = 'selected';
+                                        } else{
+                                            $selected = '';
+                                        }
+                                        echo "<option value='" . $album['id_album'] . "' $selected>" . $album['nome'] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Gênero</label>
+                            <select name="genero" id="artista" class="form-control form-control-lg bg-light fs-6" required>
+                                <?php
+                                $sql = "SELECT * FROM genero";
+                                $resultado = $conn->prepare($sql);
+                                $resultado->execute();
+                                $generos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                                if (count($generos) > 0) {
+                                    foreach ($generos as  $genero) {
+                                        if($genero['nome'] == $genero_nome){
+                                            $selected = 'selected';
+                                        } else{
+                                            $selected = '';
+                                        }
+                                        echo "<option value='" . $genero['id_genero'] . "' $selected>" . $genero['nome'] . "</option>";
+                                    }
+                                }
+                                ?>
+                                
+                            </select>
+                        </div>
+    
                 <div class="div_botao">
                 <button id="botao" type="submit" data-mdb-ripple-init class="btn mb-4">
                  Salvar
@@ -166,3 +230,4 @@ if(!isset($_SESSION["id_info"])){
   </body>
 </body>
 </html>
+

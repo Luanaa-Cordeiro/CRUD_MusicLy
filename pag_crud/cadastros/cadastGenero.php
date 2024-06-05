@@ -4,10 +4,22 @@ require('../../database/config_art.php');
 
 $nome = $_POST["nome"];
 
-$sql = 'INSERT INTO genero(nome) VALUES(:nome)';
-$resultado = $conn->prepare($sql);
-$resultado -> bindValue(':nome',$nome);
-$resultado->execute();
+$stmt = $conn->prepare('SELECT COUNT(*) FROM genero WHERE nome = :nome');
+$stmt->bindValue(':nome', $nome);
+$stmt->execute();
+$count = $stmt->fetchColumn();
 
-header("Location: ../tabelaGenero.php");
+if($count > 0){
+    header("Location: ../formGenero.php?nome=existe");
+
+} else{
+    $sql = 'INSERT INTO genero(nome) VALUES(:nome)';
+    $resultado = $conn->prepare($sql);
+    $resultado -> bindValue(':nome',$nome);
+    $resultado->execute();
+    
+    header("Location: ../tabelaGenero.php?adicionado=ok");
+}
+
+
 }

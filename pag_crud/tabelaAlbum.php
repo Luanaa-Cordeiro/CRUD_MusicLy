@@ -20,7 +20,7 @@ if(!isset($_SESSION["id_info"])){
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrapper">
+    <div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
@@ -111,33 +111,35 @@ if(!isset($_SESSION["id_info"])){
             <div class="">
               <div class="titulo">
               <?php
-                $sql = "SELECT * FROM genero";
+                $sql = "SELECT a.id_album, a.nome AS nome, a.data_lanc as Lançamento, ar.nome AS artista
+                FROM album AS a
+                JOIN artista AS ar ON a.id_artista = ar.id_artista";
                 $resultado = $conn->prepare($sql);
                 $resultado->execute();
-                $generos = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($generos) > 0){
+                $albuns = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                if(count($albuns) > 0){
                 ?>
 
-                <h1>Gêneros!</h1>
-                <button class="btn adicionar"><a href="formGenero.php">Adicionar</a></button>
+                <h1>Álbuns!</h1>
+                <button class="btn adicionar"><a href="formAlbum.php">Adicionar</a></button>
                 </div>
                 <?php
                     if(isset($_GET['delete'])) {
                       echo '<div class="alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi deletado.
+                      <strong>Sucesso!</strong> Um álbum foi deletada.
                       </div>
                       ';
                     } elseif(isset($_GET['adicionado'])) {
                       echo '<div  class="alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi adicionado.
+                      <strong>Sucesso!</strong> Um álbum foi adicionado.
                       </div>
                       ';
                     } elseif(isset($_GET['atualizado'])) {
                       echo '<div class=" alert-success  alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi atualizado.
+                      <strong>Sucesso!</strong> Um álbum foi atualizado.
                       </div>
                       ';
                     }  
@@ -149,25 +151,33 @@ if(!isset($_SESSION["id_info"])){
                     <tr>
                       <th style="background-color:#66276A; color:white;">Id</th>
                       <th style="background-color:#66276A; color:white;">Nome</th>
+                      <th style="background-color:#66276A; color:white;">Lançamento</th>
+                      <th style="background-color:#66276A; color:white;">Artista</th>
                       <th style="background-color:#66276A; color:white;"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                      foreach($generos as $genero){
+                      foreach($albuns as $album){
                         echo "<tr>";
-                        echo "<td>" . $genero['id_genero'] . "</td>";
-                        echo "<td>" . $genero['nome'] . "</td>";
+                        echo "<td>" . $album['id_album'] . "</td>";
+                        echo "<td>" . $album['nome'] . "</td>";
+                        echo "<td>" . $album['Lançamento'] . "</td>";
+                        echo "<td>" . $album['artista'] . "</td>";
                         echo "<td id='botoes'>
-                        <form id='form_deletar' method ='post' action='./deletar/genero.php'>
-                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
-                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
+                        <form id='form_deletar' method ='post' action='./deletar/album.php'>
+                        <input type='hidden' name='id' value='" . $album['id_album'] . "'/>
+                        <input type='hidden' name='nome' value='" . $album['nome'] . "'/>
+                        <input type='hidden' name='data' value='" . $album['Lançamento'] . "'/>
+                        <input type='hidden' name='artista' value='" . $album['artista'] . "'/>
                         <button type='submit' class ='btn deletar'>Deletar</button>
                         </form>";
                         echo "
-                        <form id='form_atualizar' method ='post' action='./atualizar/receberValoresGen.php'>
-                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
-                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
+                        <form id='form_atualizar' method ='post' action='./atualizar/receberValoresAlb.php'>
+                        <input type='hidden' name='id' value='" . $album['id_album'] . "'/>
+                        <input type='hidden' name='nome' value='" . $album['nome'] . "'/>
+                        <input type='hidden' name='data' value='" . $album['Lançamento'] . "'/>
+                        <input type='hidden' name='artista' value='" . $album['artista'] . "'/>
                         <button type='submit' class ='btn atualizar'>Atualizar</button>
                         </form>";
                         echo "</tr>";
@@ -181,10 +191,10 @@ if(!isset($_SESSION["id_info"])){
         } else{
           echo"<div class='vazio'>";
           echo"<div class='titulo_botao'>";
-          echo "<h1>Gênero!</h1>
-          <button class='btn adicionar'><a href='formGenero.php'>Adicionar</a></button>";
+          echo "<h1>Álbuns!</h1>
+          <button class='btn adicionar'><a href='formAlbum.php'>Adicionar</a></button>";
           echo"</div>";
-          echo "<h2>Você não tem nenhum Gênero cadastrado!</h2>";
+          echo "<h2>Você não tem nenhum álbum cadastrado!</h2>";
           echo"</div>";
         }
         ?>
@@ -224,8 +234,6 @@ if(!isset($_SESSION["id_info"])){
             </footer>
         </div>
     </div>
-
-    
  
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

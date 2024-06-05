@@ -4,7 +4,7 @@
 
             if($_POST["senha"] != $_POST["confsenha"]){
                 header("Location: ../criar.php?senha=erro");
-            } else{
+            } else {
                 require("../../database/config_log.php");
                 $usuario = trim($_POST["usuario"]);
                 $senha = trim($_POST["senha"]);

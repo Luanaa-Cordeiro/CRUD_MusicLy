@@ -16,10 +16,12 @@ if(!isset($_SESSION["id_info"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
@@ -107,82 +109,46 @@ if(!isset($_SESSION["id_info"])){
                 </div>
             </nav>
 
-            <div class="tabela">
+
+
+<div class="tabela">
             <div class="">
               <div class="titulo">
+                
               <?php
-                $sql = "SELECT * FROM genero";
+              $sql = "SELECT * from relatorioGenero where contIDcat = (
+                SELECT count(m.id_musica) as contIDcat from musicas as m join genero as g on m.id_genero = g.id_genero group by g.id_genero order by contIDcat desc limit 1)";
                 $resultado = $conn->prepare($sql);
                 $resultado->execute();
-                $generos = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($generos) > 0){
+                $relatGeneros = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                if(count($relatGeneros) > 0){
                 ?>
-
-                <h1>Gêneros!</h1>
-                <button class="btn adicionar"><a href="formGenero.php">Adicionar</a></button>
+                <h1>Gênero com mais músicas!</h1>
                 </div>
-                <?php
-                    if(isset($_GET['delete'])) {
-                      echo '<div class="alert-success alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi deletado.
-                      </div>
-                      ';
-                    } elseif(isset($_GET['adicionado'])) {
-                      echo '<div  class="alert-success alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi adicionado.
-                      </div>
-                      ';
-                    } elseif(isset($_GET['atualizado'])) {
-                      echo '<div class=" alert-success  alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi atualizado.
-                      </div>
-                      ';
-                    }  
-                  ?>
-
-                  <div class="table-wrapper">
                 <table class="table table-responsive table-striped table-hover">
                   <thead class="">
                     <tr>
-                      <th style="background-color:#66276A; color:white;">Id</th>
-                      <th style="background-color:#66276A; color:white;">Nome</th>
-                      <th style="background-color:#66276A; color:white;"></th>
+                      <th style="background-color:#66276A; color:white;">Gênero</th>
+                      <th style="background-color:#66276A; color:white;">Quantidade</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                      foreach($generos as $genero){
+                  <?php
+                      foreach($relatGeneros as  $relatGenero){
                         echo "<tr>";
-                        echo "<td>" . $genero['id_genero'] . "</td>";
-                        echo "<td>" . $genero['nome'] . "</td>";
-                        echo "<td id='botoes'>
-                        <form id='form_deletar' method ='post' action='./deletar/genero.php'>
-                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
-                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
-                        <button type='submit' class ='btn deletar'>Deletar</button>
-                        </form>";
-                        echo "
-                        <form id='form_atualizar' method ='post' action='./atualizar/receberValoresGen.php'>
-                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
-                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
-                        <button type='submit' class ='btn atualizar'>Atualizar</button>
-                        </form>";
-                        echo "</tr>";
+                        echo "<td>" . $relatGenero['Gênero'] . "</td>";
+                        echo "<td>" . $relatGenero['contIDcat'] . "</td>";
 
                       }
                       ?>
-
                   </tbody>
                 </table>
                 <?php
         } else{
           echo"<div class='vazio'>";
           echo"<div class='titulo_botao'>";
-          echo "<h1>Gênero!</h1>
-          <button class='btn adicionar'><a href='formGenero.php'>Adicionar</a></button>";
+          echo "<h1>Artistas!</h1>
+          <button class='btn adicionar'><a href='formArtista.php'>Adicionar</a></button>";
           echo"</div>";
           echo "<h2>Você não tem nenhum Gênero cadastrado!</h2>";
           echo"</div>";
@@ -192,7 +158,6 @@ if(!isset($_SESSION["id_info"])){
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <footer class="footer">
@@ -224,11 +189,14 @@ if(!isset($_SESSION["id_info"])){
             </footer>
         </div>
     </div>
+ 
 
     
  
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <script src="script.js"></script>
   </body>
 </body>

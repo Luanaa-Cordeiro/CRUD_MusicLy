@@ -1,9 +1,8 @@
 <?php
 require('../database/config_art.php');
 session_start();
-
 if(!isset($_SESSION["id_info"])){
-    header("Location: ../index.php");
+    header("Location: ../login/index.php");
 
     
 }
@@ -16,11 +15,13 @@ if(!isset($_SESSION["id_info"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrapper">
+<body>
+    <div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
@@ -48,7 +49,7 @@ if(!isset($_SESSION["id_info"])){
                             <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
+                            <a href="#" class="sidebar-link">Gênero</a>
                         </li>
                     </ul>
                 </li>
@@ -107,95 +108,109 @@ if(!isset($_SESSION["id_info"])){
                 </div>
             </nav>
 
-            <div class="tabela">
-            <div class="">
-              <div class="titulo">
-              <?php
-                $sql = "SELECT * FROM genero";
-                $resultado = $conn->prepare($sql);
-                $resultado->execute();
-                $generos = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($generos) > 0){
-                ?>
 
-                <h1>Gêneros!</h1>
-                <button class="btn adicionar"><a href="formGenero.php">Adicionar</a></button>
+            <div id="formulario">
+            <form  method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./cadastros/cadastMusica.php" data-parsley-validate>
+            <div class="col-lg-6 mb-5 mb-lg-0">
+          <div id="cadastrar" class="card shadow">
+          <?php
+          if(isset($_GET['nome'])){
+            echo '<div class="alert-danger alert alert-dismissible">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      <strong>Essa música já existe!</strong> Tente novamente.
+                      </div>
+                      ';
+          }
+          ?>
+          <span id="titulo_form">Adicione uma Música!</span>
+
+            <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="form3Example1">Nome</label>
+                      <input name="nome" type="text" id="form3Example1" class="form-control" required/>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="form3Example2">Data Lançamento</label>
+                      <input name="data" type="date" id="form3Example2" class="form-control" required/>
+                    </div>
+                  </div>
                 </div>
-                <?php
-                    if(isset($_GET['delete'])) {
-                      echo '<div class="alert-success alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi deletado.
-                      </div>
-                      ';
-                    } elseif(isset($_GET['adicionado'])) {
-                      echo '<div  class="alert-success alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi adicionado.
-                      </div>
-                      ';
-                    } elseif(isset($_GET['atualizado'])) {
-                      echo '<div class=" alert-success  alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um gênero foi atualizado.
-                      </div>
-                      ';
-                    }  
-                  ?>
 
-                  <div class="table-wrapper">
-                <table class="table table-responsive table-striped table-hover">
-                  <thead class="">
-                    <tr>
-                      <th style="background-color:#66276A; color:white;">Id</th>
-                      <th style="background-color:#66276A; color:white;">Nome</th>
-                      <th style="background-color:#66276A; color:white;"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      foreach($generos as $genero){
-                        echo "<tr>";
-                        echo "<td>" . $genero['id_genero'] . "</td>";
-                        echo "<td>" . $genero['nome'] . "</td>";
-                        echo "<td id='botoes'>
-                        <form id='form_deletar' method ='post' action='./deletar/genero.php'>
-                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
-                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
-                        <button type='submit' class ='btn deletar'>Deletar</button>
-                        </form>";
-                        echo "
-                        <form id='form_atualizar' method ='post' action='./atualizar/receberValoresGen.php'>
-                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
-                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
-                        <button type='submit' class ='btn atualizar'>Atualizar</button>
-                        </form>";
-                        echo "</tr>";
 
+                
+                    <div class="artista_select">
+                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Artista</label>
+                        <select name="artista" id="" required>
+                        <?php
+                        $sql = "SELECT * FROM artista";
+                        $resultado = $conn->prepare($sql);
+                        $resultado->execute();
+                        $artistas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                        if(count($artistas) > 0){
+                        foreach($artistas as $artista){
+                            echo "<option value='" . $artista['id_artista'] . "'>" . $artista['nome'] . "</    option>";
                       }
-                      ?>
+                    }
+                ?>
+                </select>
+                </div>
+              
 
-                  </tbody>
-                </table>
-                <?php
-        } else{
-          echo"<div class='vazio'>";
-          echo"<div class='titulo_botao'>";
-          echo "<h1>Gênero!</h1>
-          <button class='btn adicionar'><a href='formGenero.php'>Adicionar</a></button>";
-          echo"</div>";
-          echo "<h2>Você não tem nenhum Gênero cadastrado!</h2>";
-          echo"</div>";
-        }
-        ?>
-              </div>
+                <div class="album_input">
+                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">álbum</label>
+                        <select name="album" id="" required>
+                        <?php
+                        $sql = "SELECT * FROM album";
+                        $resultado = $conn->prepare($sql);
+                        $resultado->execute();
+                        $albuns = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                        if(count($albuns) > 0){
+                        foreach($albuns as $album){
+                            echo "<option value='" . $album['id_album'] . "'>" . $album['nome'] . "</    option>";
+                      }
+                    }
+                ?>
+                </select>
+                </div>
+                
+                <div class="genero_input">
+                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Gênero</label>
+                        <select name="genero" id="" required>
+                        <?php
+                        $sql = "SELECT * FROM genero";
+                        $resultado = $conn->prepare($sql);
+                        $resultado->execute();
+                        $generos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                        if(count($generos) > 0){
+                        foreach($generos as $genero){
+                            echo "<option value='" . $genero['id_genero'] . "'>" . $genero['nome'] . "</    option>";
+                      }
+                    }
+                ?>
+                </select>
+                </div>
+            
+            <div class="div_botao">
+                <button id="botao" type="submit" data-mdb-ripple-init class="btn mb-4">
+                 Adicionar
+                </button>
+                </div>
+
+
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
+        </form>
+        </div>
 
-<footer class="footer">
+        <footer class="footer">
                 <div class="container-fluid">
                     <div class="row text-body-secondary">
                         <div class="col-6 text-start ">
@@ -209,13 +224,13 @@ if(!isset($_SESSION["id_info"])){
                                     <a style="color:white;"class="" href="#">MusicLy</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a style="color:white; " href="#">Contato</a>
+                                    <a style="color:white; " href="#">Contact</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a style="color:white;" href="#">Sobre nós</a>
+                                    <a style="color:white;" href="#">About Us</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a style="color:white;" href="#">Termos e Condições</a>
+                                    <a style="color:white;" href="#">Terms & Conditions</a>
                                 </li>
                             </ul>
                         </div>
@@ -224,12 +239,8 @@ if(!isset($_SESSION["id_info"])){
             </footer>
         </div>
     </div>
-
-    
- 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-  </body>
+        
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+            <script src="script.js"></script>
 </body>
 </html>
