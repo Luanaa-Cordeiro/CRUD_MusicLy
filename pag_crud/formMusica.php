@@ -14,14 +14,14 @@ if(!isset($_SESSION["id_info"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href=".././node_modules/parsleyjs/src/parsley.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<body>
-    <div class="wrapper">
+<div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
@@ -80,10 +80,7 @@ if(!isset($_SESSION["id_info"])){
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="../login/php/logout.php" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Sair</span>
-                </a>
+               
             </div>
         </aside>
         <div class="main">
@@ -94,14 +91,15 @@ if(!isset($_SESSION["id_info"])){
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                            <a style="color:white;" href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                                 <img src="../assets/user.webp" class="avatar img-fluid" alt="">
                                 <span><?php 
                               echo $_SESSION["nome"];
                             ?></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end rounded">
-
+                            <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
+                                <i class="lni lni-exit"></i>
+                                <span><a id="sair" href="../login/php/logout.php">Sair</a></span>
                             </div>
                         </li>
                     </ul>
@@ -109,10 +107,10 @@ if(!isset($_SESSION["id_info"])){
             </nav>
 
 
-            <div id="formulario">
+            <div id="formulario_mus">
             <form  method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./cadastros/cadastMusica.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
-          <div id="cadastrar" class="card shadow">
+          <div id="cadastrar_mus" class="card shadow">
           <?php
           if(isset($_GET['nome'])){
             echo '<div class="alert-danger alert alert-dismissible">
@@ -120,11 +118,17 @@ if(!isset($_SESSION["id_info"])){
                       <strong>Essa música já existe!</strong> Tente novamente.
                       </div>
                       ';
-          }
+          }elseif (isset($_GET['preencha'])){
+            echo '<div style="color:#be0505;" class="alert-danger alert alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Preencha todos os campos</strong>
+            </div>
+            ';
+        }
           ?>
           <span id="titulo_form">Adicione uma Música!</span>
 
-            <div class="card-body">
+            <div id="inputs_mus" class="card-body">
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div data-mdb-input-init class="form-outline">
@@ -195,9 +199,12 @@ if(!isset($_SESSION["id_info"])){
                 </div>
             
             <div class="div_botao">
-                <button id="botao" type="submit" data-mdb-ripple-init class="btn mb-4">
+                <button id="botao_mus" type="submit" data-mdb-ripple-init class="btn mb-4">
                  Adicionar
                 </button>
+                </div>
+                <div id="voltar">
+                <a href="tabelaMusica.php">Voltar</a>
                 </div>
 
 
@@ -242,5 +249,8 @@ if(!isset($_SESSION["id_info"])){
         
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
             <script src="script.js"></script>
+            <script src=".././node_modules/jquery/dist/jquery.js"></script>
+            <script src=".././node_modules/parsleyjs/dist/parsley.min.js"></script>
+            <script src=".././node_modules/parsleyjs/dist/i18n/pt-br.js"></script>
 </body>
 </html>

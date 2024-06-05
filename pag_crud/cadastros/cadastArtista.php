@@ -4,7 +4,6 @@ require('../../database/config_art.php');
 
 $nome = $_POST["nome"];
 
-
 $stmt = $conn->prepare('SELECT COUNT(*) FROM artista WHERE nome = :nome');
 $stmt->bindValue(':nome', $nome);
 $stmt->execute();
@@ -22,6 +21,6 @@ if($count > 0){
     header("Location: ../tabelaArtista.php?adicionado=ok");
 }
 
-
-
+} else{
+    header("Location: ../formArtista.php?preencha=vazio");
 }

@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST["nome"]) && !empty($_POST["nome"])){
+if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["data"]) && !empty($_POST["data"]) &&isset($_POST["artista"]) && !empty($_POST["artista"]) && isset($_POST["genero"]) && !empty($_POST["genero"]) && isset($_POST["album"]) && !empty($_POST["album"])){
 require('../../database/config_art.php');
 
 $nome = $_POST["nome"];
@@ -27,6 +27,6 @@ if($count > 0){
     $resultado->execute();
     header("Location: ../tabelaMusica.php?adicionado=ok");
 }
-
-
+} else{
+    header("Location: ../formMusica.php?preencha=vazio");
 }

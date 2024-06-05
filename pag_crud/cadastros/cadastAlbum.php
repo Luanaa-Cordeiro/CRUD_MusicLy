@@ -27,4 +27,6 @@ header("Location: ../tabelaAlbum.php?adicionado=ok");
 }
 
 
+} else{
+    header("Location: ../formAlbum.php?preencha=vazio");
 }

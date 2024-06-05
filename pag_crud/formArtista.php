@@ -20,9 +20,7 @@ if(!isset($_SESSION["id_info"])){
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<body>
-    <div class="wrapper">
+<div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
@@ -81,10 +79,7 @@ if(!isset($_SESSION["id_info"])){
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="../login/php/logout.php" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Sair</span>
-                </a>
+               
             </div>
         </aside>
         <div class="main">
@@ -95,14 +90,15 @@ if(!isset($_SESSION["id_info"])){
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                            <a style="color:white;" href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                                 <img src="../assets/user.webp" class="avatar img-fluid" alt="">
                                 <span><?php 
                               echo $_SESSION["nome"];
                             ?></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end rounded">
-
+                            <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
+                                <i class="lni lni-exit"></i>
+                                <span><a id="sair" href="../login/php/logout.php">Sair</a></span>
                             </div>
                         </li>
                     </ul>
@@ -120,7 +116,13 @@ if(!isset($_SESSION["id_info"])){
                       <strong>Esse artista já existe!</strong> Tente novamente.
                       </div>
                       ';
-          }
+          }elseif (isset($_GET['preencha'])){
+            echo '<div style="color:#be0505;" class="alert-danger alert alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Preencha todos os campos</strong>
+            </div>
+            ';
+        }
           ?>
           <span id="titulo_form">Adicione um Artista!</span>
 

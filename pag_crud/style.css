@@ -188,6 +188,21 @@ a.sidebar-link:hover {
 
 
 /*Inicio*/
+#sair{
+    color: white;
+    padding-left: 0 5px;
+    text-decoration: none;
+}
+
+.sair_menu{
+    background-color: #575252;
+}
+
+.sair_menu i{
+    color: white;
+    margin-left: 10px;
+}
+
 .card{
     margin: 0 35px;
     height: 450px;
@@ -227,11 +242,35 @@ a.sidebar-link:hover {
 }
 
 #cadastrar_art{
-    width: 600px;
-    height: 500px;
+    width: 550px;
+    height: 450px;
     border-radius: 20px;
     background-color: rgb(255, 251, 251);
     border: none;
+}
+
+#cadastrar_gen{
+    width: 550px;
+    height: 450px;
+    border-radius: 20px;
+    background-color: rgb(255, 251, 251);
+    border: none;
+}
+
+#cadastrar_alb{
+    width: 650px;
+    height: 550px;
+    border-radius: 20px;
+    background-color: rgb(255, 251, 251);
+    border: none; 
+}
+
+#cadastrar_mus{
+    width:800px;
+    height: 730px;
+    border-radius: 20px;
+    background-color: rgb(255, 251, 251);
+    border: none; 
 }
 
 .botao{
@@ -244,18 +283,32 @@ a.sidebar-link:hover {
     color: white;
 }
 
-#formulario{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 100px;
-}
-
 #formulario_art{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 150px;
+}
+
+#formulario_gen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+#formulario_alb{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 125px;
+}
+
+#formulario_mus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 
@@ -266,23 +319,79 @@ a.sidebar-link:hover {
     flex-direction: column;
     }
 
+#input_gen{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+}
+
     
 .input_art label{
-    margin-left: 85px;
+    margin-left: 65px;
 }
+
+.input_gen label{
+    margin-left: 65px;
+}
+
 #input_art input{
     width: 400px;
     margin-bottom: 10px;
 }
 
+#input_gen input{
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+#input_gen input{
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+#inputs_alb{
+    margin: 0 30px;
+}
+
+#inputs_mus{
+    margin: 0 50px;
+}
+
 #botao{
     background-color: #775584; 
-    border-radius: 15px; 
-    width: 120px; 
+    border-radius: 15px;  
     color: white;
-    margin-top: 10px;
+    margin-top: 0px;
     width: 400px;
 }
+
+#botao_alb{
+    width: 560px; 
+    background-color: #775584; 
+    border-radius: 15px;  
+    color: white;
+    margin-top: 15px;
+}
+
+#botao_mus{
+    width: 700px; 
+    background-color: #775584; 
+    border-radius: 15px;  
+    color: white;
+    margin-top: 15px;
+}
+
+#botao_modal{
+    background-color: #775584;
+    color: white;
+    border: none;
+}
+
+#botao_modal:hover{
+    background-color: #3c173f;
+}
+
 
 .div_botao{
     display: flex;
@@ -304,6 +413,14 @@ a.sidebar-link:hover {
 }
 
 #botao:hover{
+    background-color: #66276A;
+}
+
+#botao_mus:hover{
+    background-color: #66276A;
+}
+
+#botao_alb:hover{
     background-color: #66276A;
 }
 
@@ -380,6 +497,42 @@ a.sidebar-link:hover {
     font-size: 55px;
     font-weight: 600;
 }
+
+
+
+/*Sem elementos na tabela*/
+.main_vazio{
+    width: 2000px;
+}
+
+.botao_vazio{
+    background-color: #66276A;
+    color: white;
+    padding: 0px 0px;
+    height: 46px;
+    width: 120px;
+    margin-top: 15px;
+}
+
+.botao_vazio a{
+    text-decoration: none;
+    color: white;
+}
+
+.botao_vazio:hover{
+    background-color: #3c173f;
+    color: white;
+}
+
+.elementos_vazios{
+    display: flex;
+    justify-content: space-between;
+}
+
+.elementos_vazios h1{
+    margin-bottom: 30px;
+}
+
 /*Elementos Tabelas*/
 
 
@@ -439,8 +592,6 @@ select{
 }
 
 
-
-
 #botoes{
     display: flex;
     flex-direction: row;
@@ -457,25 +608,23 @@ select{
         border: none;
     } 
 
-    
-    .botao{
-        background-color: #66276A;
-        color: aliceblue;
+    #cadastrar_gen{
+        width: 300px;
+        height: 450px;
+        border-radius: 20px;
+        background-color: rgb(255, 251, 251);
+        border: none;
     }
     
-    .botao:hover{
-        background-color: #442163;
-        color: white;
-    }
-    
-    #formulario{
+
+    #formulario_art{
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 100px;
+        margin-top: 20px;
     }
-    
-    #formulario_art{
+
+     #formulario_gen{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -489,21 +638,50 @@ select{
         justify-content: center;
         flex-direction: column;
         }
+
+    #input_gen{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+
+    #input_art input{
+        width: 250px;
+    }
+
+    #input_gen input{
+        width: 250px;
+    }
     
         
     .input_art label{
         margin-left: 12px;
     }
-    #input_art input{
-        width: 250px;
+
+    .input_gen label{
+        margin-left: 12px;
+    }
+
+    
+    .botao{
+        background-color: #66276A;
+        color: aliceblue;
     }
     
+    .botao:hover{
+        background-color: #442163;
+        color: white;
+    }
+
+
     #botao{
         background-color: #775584; 
         border-radius: 20px; 
-        width: 120px; 
+        width: 250px; 
         color: white;
-        margin-top: 10px;
+        margin-top: 0px;
     }
     
     .div_botao{
@@ -557,6 +735,14 @@ select{
         background-color: rgb(255, 251, 251);
         border: none;
     }
+
+    #cadastrar_gen{
+        width: 250px;
+        height: 450px;
+        border-radius: 20px;
+        background-color: rgb(255, 251, 251);
+        border: none;
+    }
     
     .botao{
         background-color: #66276A;
@@ -581,7 +767,13 @@ select{
         justify-content: center;
         margin-top: 20px;
     }
-    
+
+    #formulario_gen{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
     
     #input_art{
         display: flex;
@@ -589,11 +781,29 @@ select{
         justify-content: center;
         flex-direction: column;
         }
+
+    #input_gen{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .input_gen label{
+        margin-left: 10px;
+        font-size: 15px;
+    }
+
+    #input_gen input{
+        width: 200px;
+    }
     
         
     .input_art label{
         margin-left: 10px;
+        font-size: 15px;
     }
+
     #input_art input{
         width: 200px;
     }
@@ -601,9 +811,10 @@ select{
     #botao{
         background-color: #775584; 
         border-radius: 20px; 
-        width: 120px; 
+        width: 200px; 
         color: white;
-        margin-top: 10px;
+        margin-top: 0px;
+        font-size: 15px;
     }
     
     .div_botao{

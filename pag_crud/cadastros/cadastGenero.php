@@ -20,6 +20,6 @@ if($count > 0){
     
     header("Location: ../tabelaGenero.php?adicionado=ok");
 }
-
-
+} else{
+    header("Location: ../formGenero.php?preencha=vazio");
 }

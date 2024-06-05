@@ -48,7 +48,7 @@ if(!isset($_SESSION["id_info"])){
                             <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
+                            <a href="#" class="sidebar-link">Gênero</a>
                         </li>
                     </ul>
                 </li>
@@ -79,10 +79,7 @@ if(!isset($_SESSION["id_info"])){
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="../login/php/logout.php" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Sair</span>
-                </a>
+               
             </div>
         </aside>
         <div class="main">
@@ -93,14 +90,15 @@ if(!isset($_SESSION["id_info"])){
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                            <a style="color:white;" href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                                 <img src="../assets/user.webp" class="avatar img-fluid" alt="">
                                 <span><?php 
                               echo $_SESSION["nome"];
                             ?></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end rounded">
-
+                            <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
+                                <i class="lni lni-exit"></i>
+                                <span><a id="sair" href="../login/php/logout.php">Sair</a></span>
                             </div>
                         </li>
                     </ul>
@@ -118,7 +116,7 @@ if(!isset($_SESSION["id_info"])){
                 if(count($generos) > 0){
                 ?>
 
-                <h1>Gêneros!</h1>
+                <h1>Gêneros</h1>
                 <button class="btn adicionar"><a href="formGenero.php">Adicionar</a></button>
                 </div>
                 <?php
@@ -159,11 +157,8 @@ if(!isset($_SESSION["id_info"])){
                         echo "<td>" . $genero['id_genero'] . "</td>";
                         echo "<td>" . $genero['nome'] . "</td>";
                         echo "<td id='botoes'>
-                        <form id='form_deletar' method ='post' action='./deletar/genero.php'>
-                        <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
-                        <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
-                        <button type='submit' class ='btn deletar'>Deletar</button>
-                        </form>";
+                        <button type='submit' class ='btn deletar' data-bs-toggle='modal'
+                        data-bs-target='#modalDeletar" . $genero['id_genero'] . "'>Deletar</button>";
                         echo "
                         <form id='form_atualizar' method ='post' action='./atualizar/receberValoresGen.php'>
                         <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
@@ -179,13 +174,15 @@ if(!isset($_SESSION["id_info"])){
                 </table>
                 <?php
         } else{
-          echo"<div class='vazio'>";
-          echo"<div class='titulo_botao'>";
-          echo "<h1>Gênero!</h1>
-          <button class='btn adicionar'><a href='formGenero.php'>Adicionar</a></button>";
-          echo"</div>";
-          echo "<h2>Você não tem nenhum Gênero cadastrado!</h2>";
-          echo"</div>";
+            echo"<div class='main_vazio'>";
+            echo"<div class='vazio'>";
+            echo"<div class='elementos_vazios'>";
+            echo "<h1>Gêneros</h1>
+            <button class='btn botao_vazio'><a href='formGenero.php'>Adicionar</a></button>";
+            echo"</div>";
+            echo "<h2>Você não tem nenhum gênero cadastrado!</h2>";
+            echo"</div>";
+            echo"<div>";
         }
         ?>
               </div>
@@ -226,7 +223,29 @@ if(!isset($_SESSION["id_info"])){
     </div>
 
     
- 
+    <?php foreach ($generos as $genero) {?>
+    <div class="modal fade" id="modalDeletar<?php echo $genero['id_genero'];?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Deletar Gênero</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form id='form_deletar' method ='post' action='./deletar/genero.php'>
+        <input type='hidden' name='id' value=" <?php echo $genero['id_genero'] ?> "/>
+        <input type='hidden' name='nome' value="<?php echo $genero['nome'] ?>"/>
+    <span>Deseja realmente excluir esse gênero?</span>
+      </div>
+      <div class="modal-footer">
+        <button id="botao_modal" type="submit" class="btn btn-primary">Excluir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php }?>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="script.js"></script>

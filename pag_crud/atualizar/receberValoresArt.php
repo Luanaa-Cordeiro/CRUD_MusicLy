@@ -28,6 +28,7 @@ if(!isset($_SESSION["id_info"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../.././node_modules/parsleyjs/src/parsley.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -35,7 +36,7 @@ if(!isset($_SESSION["id_info"])){
 </head>
 <body>
 <body>
-    <div class="wrapper">
+<div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
@@ -47,57 +48,54 @@ if(!isset($_SESSION["id_info"])){
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="inicio.php" class="sidebar-link">
+                    <a href="../inicio.php" class="sidebar-link">
                         <i class="lni lni-home"></i>
                         <span>Início</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="relatorioArtista.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    <a href="../" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-files"></i>
                         <span>Relatórios</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
+                            <a href="../relatorioArtista.php" class="sidebar-link">Artista</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Gênero</a>
+                            <a href="../relatorioGenero" class="sidebar-link">Gênero</a>
                         </li>
                     </ul>
                 </li>
                
                 <li class="sidebar-item">
-                    <a href="tabelaArtista.php" class="sidebar-link">
+                    <a href="../tabelaArtista.php" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Artistas</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaGenero.php" class="sidebar-link">
+                    <a href="../tabelaGenero.php" class="sidebar-link">
                         <i class="lni lni-headphone"></i>
                         <span>Gêneros</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaAlbum.php" class="sidebar-link">
+                    <a href="../tabelaAlbum.php" class="sidebar-link">
                         <i class="lni lni-book"></i>
                         <span>Álbuns</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaMusica.php" class="sidebar-link">
+                    <a href="../tabelaMusica.php" class="sidebar-link">
                         <i class="lni lni-music"></i>
                         <span>Músicas</span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="../login/php/logout.php" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Sair</span>
-                </a>
+               
             </div>
         </aside>
         <div class="main">
@@ -108,24 +106,25 @@ if(!isset($_SESSION["id_info"])){
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="../assets/user.webp" class="avatar img-fluid" alt="">
+                            <a style="color:white;" href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="../../assets/user.webp" class="avatar img-fluid" alt="">
                                 <span><?php 
                               echo $_SESSION["nome"];
                             ?></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end rounded">
-
+                            <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
+                                <i class="lni lni-exit"></i>
+                                <span><a id="sair" href="../../login/php/logout.php">Sair</a></span>
                             </div>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <div id="formulario">
+            <div id="formulario_art">
             <form  method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="artista.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
-          <div id="cadastrar" class="card shadow">
+          <div id="cadastrar_art" class="card shadow">
           <?php
           if(isset($_GET['nome'])){
             echo '<div class="alert-danger alert alert-dismissible">
@@ -136,13 +135,15 @@ if(!isset($_SESSION["id_info"])){
           }
           ?>
           <span id="titulo_form">Atualize um Artista!</span>
-            <div class="card-body">
+                  <div class="card-body">
                 <div class="row">
                   <div class=" mb-4">
-                    <div id="input_art" class="form-outline">
+                    <div class="input_gen form-outline ">
                     <input type="hidden" id="id" name="id" value="<?php echo $id_artista; ?>"/>
-                    <label class="form-label" for="form3Example1">Nome</label>
-                    <input type="text" class="form-control form-control-lg bg-light fs-6"id="nome" name="nome" value="<?php echo $nome_artista; ?>"/><br>
+                    <label class="form-label" for="nome">Nome do Gênero</label>
+                    <div id="input_gen">
+                      <input placeholder="Nome" name="nome" type="text" id="nome" class="form-control" value="<?php echo $nome_artista; ?>" required/>
+                      </div>
                     </div>
                   </div>
 
@@ -151,6 +152,10 @@ if(!isset($_SESSION["id_info"])){
                  Salvar
                 </button>
                 </div>
+                <div id="voltar">
+                <a href="../tabelaArtista.php">Voltar</a>
+                </div>
+
 
           </div>
         </div>
@@ -159,10 +164,41 @@ if(!isset($_SESSION["id_info"])){
         </form>
         </div>
 
-           
+        <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-body-secondary">
+                        <div class="col-6 text-start ">
+                            <a class="text-body-secondary" href=" #">
+                               
+                            </a>
+                        </div>
+                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
+                            <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                    <a style="color:white;"class="" href="#">MusicLy</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a style="color:white; " href="#">Contato</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a style="color:white;" href="#">Sobre nós</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a style="color:white;" href="#">Termos e Condições</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>  
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
+    <script src="../.././node_modules/jquery/dist/jquery.js"></script>
+    <script src="../.././node_modules/parsleyjs/dist/parsley.min.js"></script>
+    <script src="../.././node_modules/parsleyjs/dist/i18n/pt-br.js"></script>
   </body>
 </body>
 </html>

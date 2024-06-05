@@ -31,7 +31,7 @@
             </div>
             ';
         } elseif (isset($_GET['preencha'])){
-            echo '<div style="color:#be0505;" class="alerta alert alert-dismissible">
+            echo '<div style="color:#be0505;" class="alert-danger alert alert-dismissible">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Preencha todos os campos</strong>
             </div>

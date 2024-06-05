@@ -34,8 +34,5 @@ if (isset($_POST["id"]) && !empty($_POST["id"]) &&
         $resultado->execute();
     
         header("Location: ../tabelaMusica.php?atualizado=ok");
-    } 
     }
-
-   
-?>
+    }

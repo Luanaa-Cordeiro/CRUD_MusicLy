@@ -50,7 +50,7 @@ if(!isset($_SESSION["id_info"])){
                             <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
+                            <a href="#" class="sidebar-link">Gênero</a>
                         </li>
                     </ul>
                 </li>
@@ -81,10 +81,7 @@ if(!isset($_SESSION["id_info"])){
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="../login/php/logout.php" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Sair</span>
-                </a>
+               
             </div>
         </aside>
         <div class="main">
@@ -95,14 +92,15 @@ if(!isset($_SESSION["id_info"])){
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                            <a style="color:white;" href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                                 <img src="../assets/user.webp" class="avatar img-fluid" alt="">
                                 <span><?php 
                               echo $_SESSION["nome"];
                             ?></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end rounded">
-
+                            <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
+                                <i class="lni lni-exit"></i>
+                                <span><a id="sair" href="../login/php/logout.php">Sair</a></span>
                             </div>
                         </li>
                     </ul>
