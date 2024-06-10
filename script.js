@@ -3,7 +3,7 @@ const sidebar = document.querySelector("#sidebar");
 
 hamBurger.addEventListener("click", function () {
     sidebar.classList.toggle("expand");
-    // Salvando o estado da barra lateral no localStorage
+
     if (sidebar.classList.contains("expand")) {
         localStorage.setItem("sidebarState", "expand");
     } else {
@@ -11,13 +11,25 @@ hamBurger.addEventListener("click", function () {
     }
 });
 
-// Restaurando o estado da barra lateral
 window.addEventListener("load", function () {
     const savedState = localStorage.getItem("sidebarState");
     if (savedState === "expand") {
         sidebar.classList.add("expand");
     }
 });
+
+var data = [{
+    values: [19, 26, 55],
+    labels: ['Residential', 'Non-Residential', 'Utility'],
+    type: 'pie'
+  }];
+  
+  var layout = {
+    height: 400,
+    width: 500
+  };
+  
+  Plotly.newPlot('myDiv', data, layout);
 
 
 //const hamBurger = document.querySelector(".toggle-btn");

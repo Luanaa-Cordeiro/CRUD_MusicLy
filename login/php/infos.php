@@ -16,10 +16,10 @@ if(isset($_POST["usuario"]) && isset($_POST["senha"]) && !empty($_POST["usuario"
 
                 $_SESSION["id_info"] = $dado["id_info"];
                 $_SESSION["nome"] = $dado["usuario"];
-                header("Location: ../../pag_crud/inicio.php");
+                header("Location: ../../index.php");
             } else{
-                header("Location: ../../index.php?incorreto=erro");
+                header("Location: ../login.php?incorreto=erro");
             }
     } else{
-        header("Location: ../../index.php?preencha=erro");
+        header("Location: ../login.php?preencha=erro");
     }

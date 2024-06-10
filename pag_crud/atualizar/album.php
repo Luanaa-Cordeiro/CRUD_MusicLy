@@ -6,10 +6,10 @@ if (isset($_POST["id"]) && !empty($_POST["id"]) &&
     isset($_POST["artista"]) && !empty($_POST["artista"])) {
     require("../../database/config_art.php");
 
-    $id_album = $_POST["id"];
-    $nome = $_POST["nome"];
-    $data = $_POST["data"];
-    $id_artista = $_POST["artista"];
+    $id_album = trim($_POST["id"]);
+    $nome = trim($_POST["nome"]);
+    $data = trim($_POST["data"]);
+    $id_artista = trim($_POST["artista"]);
 
     $stmt= $conn->prepare('SELECT COUNT(*) FROM album WHERE nome = :nome AND id_album != :id_album');
     $stmt->bindValue(':nome', $nome);
@@ -29,8 +29,6 @@ if (isset($_POST["id"]) && !empty($_POST["id"]) &&
     $resultado->bindValue(":id_artista", $id_artista);
     $resultado->bindValue(":id_album", $id_album);
     $resultado->execute();
-
     header("Location: ../tabelaAlbum.php?atualizado=ok");
 }
 
-?>

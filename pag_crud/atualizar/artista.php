@@ -2,8 +2,8 @@
 
 if (isset($_POST["id"])) {
     require("../../database/config_art.php");
-    $nome = $_POST["nome"];
-    $id_artista = $_POST["id"];
+    $nome = trim($_POST["nome"]);
+    $id_artista = trim($_POST["id"]);
 
     $stmt= $conn->prepare('SELECT COUNT(*) FROM artista WHERE nome = :nome AND id_artista != :id_artista');
     $stmt->bindValue(':nome', $nome);

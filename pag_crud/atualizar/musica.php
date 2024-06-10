@@ -6,12 +6,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"]) &&
     isset($_POST["artista"]) && !empty($_POST["artista"])) {
     require("../../database/config_art.php");
 
-    $id_musica = $_POST["id"];
-    $nome = $_POST["nome"];
-    $data = $_POST["data"];
-    $id_artista = $_POST["artista"];
-    $id_album = $_POST["album"];
-    $id_genero = $_POST["genero"];
+    $id_musica = trim($_POST["id"]);
+    $nome = trim($_POST["nome"]);
+    $data = trim($_POST["data"]);
+    $id_artista = trim($_POST["artista"]);
+    $id_album = trim($_POST["album"]);
+    $id_genero = trim($_POST["genero"]);
 
 
     $stmt= $conn->prepare('SELECT COUNT(*) FROM musicas WHERE nome = :nome AND id_musica != :id_musica');

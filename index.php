@@ -1,112 +1,238 @@
+<?php
+require('./database/config_art.php');
+session_start();
+
+if(!isset($_SESSION["id_info"])){
+   header("Location: ./login/login.php");
+
+}
+?>
+
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="icon" href="./assets/MusicLy.ico">
-    <link rel="stylesheet" href="./node_modules/parsleyjs/src/parsley.css">
-    <link rel="stylesheet" href="./css/style_login.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Sidebar With Bootstrap</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-<form method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="./login/php/infos.php" data-parsley-validate>
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-
-    <div class="row border mx-5 rounded-5 bg-white shadow box-area">
-
-    <?php 
-        if(isset($_GET['success'])) {
-            echo '<div style="color:#04a119;" class="alerta alert alert-dismissible">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Sucesso!</strong> O usuário foi cadastrado
-            </div>
-            ';
-        } elseif(isset($_GET['incorreto'])){
-            echo '<div style="color:#be0505;" class="alerta alert alert-dismissible">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Tente novamente!</strong> Usuário ou senha incorretos
-            </div>
-            ';
-        } elseif (isset($_GET['preencha'])){
-            echo '<div style="color:#be0505;" class="alert-danger alert alert-dismissible">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Preencha todos os campos</strong>
-            </div>
-            ';
-        }
-    ?> 
-    <div class="col-md-6 right-box">
-        <div class="row align-items-center">
-                <div class="header-text mb-1 ">
-                    <h2>Entre no Musicly</h2>
-                    <p>Faça seu login!</p>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="index.php">MusicLy</a>
                 </div>
-                <div id ="input_usuario" class=" d-flex flex-column">
-                    <label for="usuario" class="mb-2 fs-6 fw-medium text-gray-900">Usuário</label>
-                    <input name="usuario" id="usuario" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Usuário"  required>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="index.php" class="sidebar-link">
+                        <i class="lni lni-home"></i>
+                        <span>Início</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="./pag_crud/relatorioArtista.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-files"></i>
+                        <span>Relatórios</span>
+                    </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="./pag_crud/relatorioArtista.php" class="sidebar-link">Artista</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="./pag_crud/relatorioGenero.php" class="sidebar-link">Gênero</a>
+                        </li>
+                    </ul>
+                </li>
+               
+                <li class="sidebar-item">
+                    <a href="./pag_crud/tabelaArtista.php" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Artistas</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="./pag_crud/tabelaGenero.php" class="sidebar-link">
+                        <i class="lni lni-headphone"></i>
+                        <span>Gêneros</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="./pag_crud/tabelaAlbum.php" class="sidebar-link">
+                        <i class="lni lni-book"></i>
+                        <span>Álbuns</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="./pag_crud/tabelaMusica.php" class="sidebar-link">
+                        <i class="lni lni-music"></i>
+                        <span>Músicas</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+               
+            </div>
+        </aside>
+        <div class="main">
+            <nav class="navbar navbar-expand px-4 py-3">
+                <form action="#" class="d-none d-sm-inline-block">
 
+                </form>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a style="color:white;" href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="./assets/user.webp" class="avatar img-fluid" alt="">
+                                <span><?php 
+                              echo $_SESSION["nome"];
+                            ?></span>
+                            </a>
+                            <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
+                                <i class="lni lni-exit"></i>
+                                <button id="sair" data-bs-toggle="modal" data-bs-target="#modalSair">Sair</button>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div id ="input_senha" class="d-flex flex-column">
-                    <label for="senha" class="mb-2 fs-6 fw-medium text-gray-900">Senha</label>
-                    <input name="senha" id="password" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Senha" required>
-                </div>
-                <div id ="senha_esqueceu" class="input-group  d-flex justify-content-between">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="formCheck" onclick="show()">
-                        <label for="formCheck" class="form-check-label text-secondary"><small>Exibir senha</small></label>
-                        <small><a style="color: #66276A;" id = "senha" href="#" class="forgot_senha">Esqueceu a senha?</a></small>
+            </nav>
+
+      <div class="inicio">
+      <h1>Bem-Vindo(a) <?php echo $_SESSION["nome"];?>!</h1>
+
+      <div class="cartas row">
+            <div class="card">
+              <img src="./assets/nota_musical.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Músicas</h5>
+                <p class="card-text">Músicas disponíveis: 
+                <?php
+                $sql = "SELECT COUNT(id_musica) AS total_musicas FROM musicas";
+                $resultado = $conn->prepare($sql);
+                $resultado->execute();
+                $musicas = $resultado->fetch(PDO::FETCH_ASSOC);
+                echo $musicas['total_musicas']; 
+                ?>
+                </p>
+                <a href="./pag_crud/tabelaMusica.php" class="btn botao">Exibir</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="./assets/artista.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Artistas</h5>
+                <p class="card-text">Artistas disponíveis: 
+                <?php
+                $sql = "SELECT COUNT(id_artista) AS total_artistas FROM artista";
+                $resultado = $conn->prepare($sql);
+                $resultado->execute();
+                $artistas = $resultado->fetch(PDO::FETCH_ASSOC);
+                echo $artistas['total_artistas']; 
+                ?>
+                </p>
+                <a href="./pag_crud/tabelaArtista.php" class="btn botao">Exibir</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="./assets/album.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Álbuns</h5>
+                <p class="card-text">Álbuns disponíveis: 
+                <?php
+                $sql = "SELECT COUNT(id_album) AS total_albuns FROM album";
+                $resultado = $conn->prepare($sql);
+                $resultado->execute();
+                $albuns = $resultado->fetch(PDO::FETCH_ASSOC);
+                echo $albuns['total_albuns']; 
+                ?></p>
+                <a href="./pag_crud/tabelaAlbum.php" class="btn botao">Exibir</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <img src="./assets/generos.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Gêneros</h5>
+                <p class="card-text">Gêneros disponíveis: 
+                <?php
+                $sql = "SELECT COUNT(id_genero) AS total_generos FROM genero";
+                $resultado = $conn->prepare($sql);
+                $resultado->execute();
+                $generos = $resultado->fetch(PDO::FETCH_ASSOC);
+                echo $generos['total_generos']; 
+                ?>  
+                </p>
+                <a href="./pag_crud/tabelaGenero.php" class="btn botao">Exibir</a>
+              </div>
+            </div>
+           </div>
+          </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-body-secondary">
+                        <div class="col-6 text-start ">
+                            <a class="text-body-secondary" href=" #">
+                               
+                            </a>
+                        </div>
+                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
+                            <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                    <a class="footer_item" href="index.php">MusicLy</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="footer_item" href="./pag_crud/contato.php">Contato</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="footer_item" href="./pag_crud/sobre.php">Sobre nós</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="footer_item" href="./pag_crud/termos.php">Termos e Condições</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
                 </div>
-                <div class="mb-3">
-                    <button class="btn btn-lg fs-6 botao" id="botao">Entrar</button>
-                </div>
-
-                
-                <div class="input-group mb-4">
-                    <button class="btn btn-lg btn-light fs-6" id = "google"><img src="./assets/pesquisa.png" style="width:20px" class="me-2"><small><a style="text-decoration: none; color: black;" href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.google.com%2F%3Fptid%3D19027681%26ptt%3D8%26fpts%3D0&ec=futura_hpp_co_si_001_p&ifkv=AaSxoQygX15hbEW-3BFAxaw3IL7C4UYBvnwYyw4aEEUgroG-xbeHy-zTAMBggny3QbaviRRCS-XbNw&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-888448138%3A1716486336838452&ddm=0">Entre com o google</a></small></button>
-                </div>
-                <div class="row">
-                    <small>Não tem uma conta? <a style="color: #66276A;" href="./login/criar.php">Criar</a></small>
-                </div>
+            </footer>
         </div>
-    </div> 
-
-    <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
-        <div class="featured-image mb-3 img">
-        <img src="./assets/MusicLy.png" class="img-fluid image" style="width: 800px;">
-        </div>
-    </div> 
-    
     </div>
+
+    <div class="modal fade" id="modalSair" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Sair da conta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span>Deseja realmente sair?</span>
+      </div>
+      <div class="modal-footer">
+        
+        <a href="./login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      </div>
     </div>
-    </form>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <script>
-    let isenha, usuario, senha, botao;
-
-
-function show() {
-    isenha= document.getElementById("password");
-    if(isenha.type === "password") {
-        isenha.type = "text";
-        
-    } else {
-        isenha.type = "password";
-        
-    } 
-}
-</script>
-
-<script src="./node_modules/jquery/dist/jquery.js"></script>
-<script src="./node_modules/parsleyjs/dist/parsley.min.js"></script>
-<script src="./node_modules/parsleyjs/dist/i18n/pt-br.js"></script>
-    
+  </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

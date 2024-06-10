@@ -2,11 +2,11 @@
 if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["data"]) && !empty($_POST["data"]) &&isset($_POST["artista"]) && !empty($_POST["artista"]) && isset($_POST["genero"]) && !empty($_POST["genero"]) && isset($_POST["album"]) && !empty($_POST["album"])){
 require('../../database/config_art.php');
 
-$nome = $_POST["nome"];
-$data = $_POST["data"];
-$artista = $_POST["artista"];
-$genero = $_POST["genero"];
-$album = $_POST["album"];
+$nome = trim($_POST["nome"]);
+$data = trim($_POST["data"]);
+$artista = trim($_POST["artista"]);
+$genero = trim($_POST["genero"]);
+$album = trim($_POST["album"]);
 
 
 $stmt = $conn->prepare('SELECT COUNT(*) FROM musicas WHERE nome = :nome');

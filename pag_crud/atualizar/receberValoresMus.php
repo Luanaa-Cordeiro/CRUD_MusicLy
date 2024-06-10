@@ -2,8 +2,8 @@
 session_start();
 
 if (!isset($_SESSION["id_info"])) {
-    header("Location: ../index.php");
-    exit;
+    header("Location: ../../login/login.php");
+    
 }
 
 require('../../database/config_art.php');
@@ -33,7 +33,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
 <body>
@@ -44,12 +44,12 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                     <i class="lni lni-grid-alt"></i>
                 </button>
                 <div class="sidebar-logo">
-                    <a href="#">MusicLy</a>
+                    <a href="../../index.php">MusicLy</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="../inicio.php" class="sidebar-link">
+                    <a href="../../index.php" class="sidebar-link">
                         <i class="lni lni-home"></i>
                         <span>Início</span>
                     </a>
@@ -115,7 +115,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                             </a>
                             <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
                                 <i class="lni lni-exit"></i>
-                                <span><a id="sair" href="../../login/php/logout.php">Sair</a></span>
+                                <button id="sair" data-bs-toggle="modal" data-bs-target="#modalSair">Sair</button>
                             </div>
                         </li>
                     </ul>
@@ -123,12 +123,12 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
             </nav>
 
             <div id="formulario_mus">
-            <form  method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="musica.php" data-parsley-validate>
+            <form  method ="POST" class="form_php space-y-4 md:space-y-6" action="musica.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
           <div id="cadastrar_mus" class="card shadow">
           <?php
           if(isset($_GET['nome'])){
-            echo '<div class="alert-danger alert alert-dismissible">
+            echo '<div class="mb-0 alert-danger alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                       <strong>Esse artista já existe!</strong> Tente novamente.
                       </div>
@@ -141,13 +141,13 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                   <div class="col-md-6 mb-4">
                     <div data-mdb-input-init class="form-outline">
                     <input name="id" type="hidden" class="form-control form-control-lg bg-light fs-6" value="<?php echo $id_musica; ?>" required>
-                    <label class="form-label" for="form3Example1">Nome</label>
-                      <input name="nome" type="text" id="form3Example1" class="form-control" value="<?php echo $nome_musica;?>" required/>
+                    <label class="form-label" for="form3Example1">Nome da música</label>
+                      <input placeholder="Nome" name="nome" type="text" id="form3Example1" class="form-control" value="<?php echo $nome_musica;?>" required/>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                     <div data-mdb-input-init class="form-outline">
-                    <label class="form-label" for="form3Example2">Data Lançamento</label>
+                    <label class="form-label" for="form3Example2">Data de Lançamento</label>
                       <input name="data" type="date" id="form3Example2" class="form-control" value="<?php echo $data; ?>" required/>
                     </div>
                   </div>
@@ -179,7 +179,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
               
 
                 <div class="album_input">
-                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">álbum</label>
+                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Álbum</label>
                         <select name="album" id="" required>
                         <?php
                                 $sql = "SELECT * FROM album";
@@ -249,16 +249,16 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                         <div class="col-6 text-end text-body-secondary d-none d-md-block">
                             <ul class="list-inline mb-0">
                             <li class="list-inline-item">
-                                    <a style="color:white;"class="" href="#">MusicLy</a>
+                            <a class="footer_item" href="../../index.php">MusicLy</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a style="color:white; " href="#">Contato</a>
+                                    <a class="footer_item" href="../contato.php">Contato</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a style="color:white;" href="#">Sobre nós</a>
+                                    <a class="footer_item" href="../sobre.php">Sobre nós</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a style="color:white;" href="#">Termos e Condições</a>
+                                    <a class="footer_item" href="../termos.php">Termos e Condições</a>
                                 </li>
                             </ul>
                         </div>
@@ -266,10 +266,28 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                 </div>
             </footer>
         </div>
-    </div>  
+    </div> 
+
+    <div class="modal fade" id="modalSair" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Sair da conta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span>Deseja realmente sair?</span>
+      </div>
+      <div class="modal-footer">
+        
+        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../script.js"></script>
+    <script src="../../script.js"></script>
     <script src="../.././node_modules/jquery/dist/jquery.js"></script>
     <script src="../.././node_modules/parsleyjs/dist/parsley.min.js"></script>
     <script src="../.././node_modules/parsleyjs/dist/i18n/pt-br.js"></script>

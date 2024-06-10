@@ -16,7 +16,7 @@ require('../../database/config_art.php');
 session_start();
 
 if(!isset($_SESSION["id_info"])){
-    header("Location: ../index.php");
+    header("Location: ../../login/login.php");
 
     
 }
@@ -28,76 +28,74 @@ if(!isset($_SESSION["id_info"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../.././node_modules/parsleyjs/src/parsley.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
 <body>
-    <div class="wrapper">
+<div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                     <i class="lni lni-grid-alt"></i>
                 </button>
                 <div class="sidebar-logo">
-                    <a href="#">MusicLy</a>
+                    <a href="../../index.php">MusicLy</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="inicio.php" class="sidebar-link">
+                    <a href="../../index.php" class="sidebar-link">
                         <i class="lni lni-home"></i>
                         <span>Início</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="relatorioArtista.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    <a href="../" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-files"></i>
                         <span>Relatórios</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
+                            <a href="../relatorioArtista.php" class="sidebar-link">Artista</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Gênero</a>
+                            <a href="../relatorioGenero" class="sidebar-link">Gênero</a>
                         </li>
                     </ul>
                 </li>
                
                 <li class="sidebar-item">
-                    <a href="tabelaArtista.php" class="sidebar-link">
+                    <a href="../tabelaArtista.php" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Artistas</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaGenero.php" class="sidebar-link">
+                    <a href="../tabelaGenero.php" class="sidebar-link">
                         <i class="lni lni-headphone"></i>
                         <span>Gêneros</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaAlbum.php" class="sidebar-link">
+                    <a href="../tabelaAlbum.php" class="sidebar-link">
                         <i class="lni lni-book"></i>
                         <span>Álbuns</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaMusica.php" class="sidebar-link">
+                    <a href="../tabelaMusica.php" class="sidebar-link">
                         <i class="lni lni-music"></i>
                         <span>Músicas</span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="../login/php/logout.php" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Sair</span>
-                </a>
+               
             </div>
         </aside>
         <div class="main">
@@ -108,49 +106,56 @@ if(!isset($_SESSION["id_info"])){
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="../assets/user.webp" class="avatar img-fluid" alt="">
+                            <a style="color:white;" href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="../../assets/user.webp" class="avatar img-fluid" alt="">
                                 <span><?php 
                               echo $_SESSION["nome"];
                             ?></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end rounded">
-
+                            <div class="sair_menu dropdown-menu dropdown-menu-end rounded">
+                                <i class="lni lni-exit"></i>
+                                <button id="sair" data-bs-toggle="modal" data-bs-target="#modalSair">Sair</button>
                             </div>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <div id="formulario">
-            <form  method ="POST" class=" was-validated form_php space-y-4 md:space-y-6" action="genero.php" data-parsley-validate>
+            <div id="formulario_gen">
+            <form  method ="POST" class="form_php space-y-4 md:space-y-6" action="genero.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
-          <div id="cadastrar" class="card shadow">
+          <div id="cadastrar_gen" class="card shadow">
           <?php
           if(isset($_GET['nome'])){
-            echo '<div class="alert-danger alert alert-dismissible">
+            echo '<div class="mb-0 alert-danger alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Esse artista já existe!</strong> Tente novamente.
+                      <strong>Esse gênero já existe!</strong> Tente novamente.
                       </div>
                       ';
           }
           ?>
           <span id="titulo_form">Atualize o Gênero!</span>
-            <div class="card-body">
+           
+                  <div class="card-body">
                 <div class="row">
                   <div class=" mb-4">
-                    <div id="input_art" class="form-outline">
-                    
-                    <input type="hidden" id="id" name="id" value="<?php echo $id_genero; ?>"/>
-                    <label class="form-label" for="form3Example1">Nome</label>
-                    <input placeholder="Nome" type="text" class="form-control form-control-lg bg-light fs-6"id="nome" name="nome" value="<?php echo $nome_genero; ?>"/><br>
+                    <div class="input_gen form-outline ">
+                    <input type="hidden" id="id" name="id" value="<?php echo $id_genero;?>"/>
+                    <label class="form-label" for="nome">Nome do Gênero</label>
+                    <div id="input_gen">
+                      <input placeholder="Nome" name="nome" type="text" id="nome" class="form-control" value="<?php echo $nome_genero; ?>" required/>
+                      </div>
                     </div>
                   </div>
+
 
                 <div class="div_botao">
                 <button id="botao" type="submit" data-mdb-ripple-init class="btn mb-4">
                  Salvar
                 </button>
+                </div>
+                <div id="voltar">
+                <a href="../tabelaGenero.php">Voltar</a>
                 </div>
 
           </div>
@@ -160,10 +165,59 @@ if(!isset($_SESSION["id_info"])){
         </form>
         </div>
 
-           
+        <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-body-secondary">
+                        <div class="col-6 text-start ">
+                            <a class="text-body-secondary" href=" #">
+                               
+                            </a>
+                        </div>
+                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
+                            <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                            <a class="footer_item" href="../../index.php">MusicLy</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../contato.php">Contato</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../sobre.php">Sobre nós</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../termos.php">Termos e Condições</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>  
+
+    <div class="modal fade" id="modalSair" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Sair da conta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span>Deseja realmente sair?</span>
+      </div>
+      <div class="modal-footer">
+        
+        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../script.js"></script>
+    <script src="../../script.js"></script>
+    <script src="../.././node_modules/jquery/dist/jquery.js"></script>
+    <script src="../.././node_modules/parsleyjs/dist/parsley.min.js"></script>
+    <script src="../.././node_modules/parsleyjs/dist/i18n/pt-br.js"></script>
   </body>
 </body>
 </html>

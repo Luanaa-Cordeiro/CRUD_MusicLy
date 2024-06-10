@@ -3,9 +3,9 @@ if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["data"]) && !
 && isset($_POST["artista"]) && !empty($_POST["artista"])){
 require('../../database/config_art.php');
 
-$nome = $_POST["nome"];
-$data = $_POST["data"];
-$artista = $_POST["artista"];
+$nome = trim($_POST["nome"]);
+$data = trim($_POST["data"]);
+$artista = trim($_POST["artista"]);
 
 $stmt = $conn->prepare('SELECT COUNT(*) FROM album WHERE nome = :nome');
 $stmt->bindValue(':nome', $nome);

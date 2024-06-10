@@ -2,7 +2,7 @@
 if(isset($_POST["nome"]) && !empty($_POST["nome"])){
 require('../../database/config_art.php');
 
-$nome = $_POST["nome"];
+$nome = trim($_POST["nome"]);
 
 $stmt = $conn->prepare('SELECT COUNT(*) FROM artista WHERE nome = :nome');
 $stmt->bindValue(':nome', $nome);

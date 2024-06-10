@@ -25,7 +25,7 @@
                 $resultado -> bindValue('senha',$senha);
                 $resultado -> execute();
 
-                header("Location: ../../index.php?success=ok");
+                header("Location: ../login.php?success=ok");
             }
 
         } else {
