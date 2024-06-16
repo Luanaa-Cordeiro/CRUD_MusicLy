@@ -11,81 +11,70 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema catalogo_musicas
 -- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Schema catalogo_musicas
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `catalogo_musicas` DEFAULT CHARACTER SET utf8 ;
-USE `catalogo_musicas` ;
+CREATE SCHEMA IF NOT EXISTS `catalogo_musicas` DEFAULT CHARACTER SET utf8;
+USE `catalogo_musicas`;
 
 -- -----------------------------------------------------
 -- Table `catalogo_musicas`.`artista`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catalogo_musicas`.`artista` (
-  `id_artista` INT NULL AUTO_INCREMENT,
+  `id_artista` INT AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_artista`))
-ENGINE = InnoDB;
-
+  PRIMARY KEY (`id_artista`),
+  UNIQUE (`nome`)
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `catalogo_musicas`.`album`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catalogo_musicas`.`album` (
-  `id_album` INT NULL AUTO_INCREMENT,
+  `id_album` INT AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `data_lanc` DATE NOT NULL,
   `id_artista` INT NOT NULL,
   PRIMARY KEY (`id_album`),
-  INDEX `fk_álbum_artista1_idx` (`id_artista` ASC) VISIBLE,
-  CONSTRAINT `fk_álbum_artista1`
-    FOREIGN KEY (`id_artista`)
+  UNIQUE (`nome`),
+  FOREIGN KEY (`id_artista`)
     REFERENCES `catalogo_musicas`.`artista` (`id_artista`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `catalogo_musicas`.`genero`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catalogo_musicas`.`genero` (
-  `id_genero` INT NULL AUTO_INCREMENT,
+  `id_genero` INT AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_genero`))
-ENGINE = InnoDB;
-
+  PRIMARY KEY (`id_genero`),
+  UNIQUE (`nome`)
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `catalogo_musicas`.`musicas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catalogo_musicas`.`musicas` (
-  `id_musica` INT NULL AUTO_INCREMENT,
+  `id_musica` INT AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `data_lanc` DATE NOT NULL,
   `id_artista` INT NOT NULL,
   `id_album` INT NOT NULL,
   `id_genero` INT NOT NULL,
   PRIMARY KEY (`id_musica`),
-  INDEX `fk_Musicas_artista_idx` (`id_artista` ASC) VISIBLE,
-  INDEX `fk_Musicas_álbum1_idx` (`id_album` ASC) VISIBLE,
-  INDEX `fk_Musicas_genero1_idx` (`id_genero` ASC) VISIBLE,
-  CONSTRAINT `fk_Musicas_artista`
-    FOREIGN KEY (`id_artista`)
+  FOREIGN KEY (`id_artista`)
     REFERENCES `catalogo_musicas`.`artista` (`id_artista`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Musicas_álbum1`
-    FOREIGN KEY (`id_album`)
+  FOREIGN KEY (`id_album`)
     REFERENCES `catalogo_musicas`.`album` (`id_album`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Musicas_genero1`
-    FOREIGN KEY (`id_genero`)
+  FOREIGN KEY (`id_genero`)
     REFERENCES `catalogo_musicas`.`genero` (`id_genero`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  UNIQUE (`nome`)
+) ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
