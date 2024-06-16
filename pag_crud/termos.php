@@ -127,7 +127,7 @@ if(!isset($_SESSION["id_info"])){
                                     <a class="footer_item" href="../index.php">MusicLy</a>
                                     <a class="footer_item" href="./contato.php">Contato</a>
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
-                                    <a class="footer_item" href="./termos.php">Termos e Condições</a>
+                                    <a class="footer_item active" href="./termos.php">Termos e Condições</a>
             </footer>
         </div>
     </div>

@@ -205,8 +205,13 @@ a.sidebar-link:hover:not(.active) {
    margin: 15px 10px;
 }
 
-.footer_item:hover {
-    color:  #928f8f; 
+.footer_item.active{
+    color:  #929292; 
+    margin: 15px 10px;
+}
+
+.footer_item:hover:not(.active) {
+    color:  #858585; 
 }
 
 .nav-item span:hover{
