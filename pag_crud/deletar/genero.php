@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_POST["id"])){
+if(isset($_POST["id"]) && !empty($_POST["id"])){
     require ("../../database/config_art.php");
     $nome = $_POST["nome"];
     $id_genero = $_POST["id"];

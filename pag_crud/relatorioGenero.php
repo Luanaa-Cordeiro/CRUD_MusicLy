@@ -131,7 +131,7 @@ if(!isset($_SESSION["id_info"])){
                   <thead class="">
                     <tr>
                       <th style="background-color:#66276A; color:white;">Gênero</th>
-                      <th style="background-color:#66276A; color:white;">Quantidade</th>
+                      <th style="background-color:#66276A; color:white;">Quantidade de músicas</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -140,7 +140,7 @@ if(!isset($_SESSION["id_info"])){
                         echo "<tr>";
                         echo "<td>" . $relatGenero['Gênero'] . "</td>";
                         echo "<td>" . $relatGenero['contIDcat'] . "</td>";
-
+                        echo "<tr>";
                       }
                       ?>
                   </tbody>

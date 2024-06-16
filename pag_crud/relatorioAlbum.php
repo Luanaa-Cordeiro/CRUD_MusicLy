@@ -139,7 +139,7 @@ if(!isset($_SESSION["id_info"])){
                         echo "<tr>";
                         echo "<td>" . $relatorio['Álbum'] . "</td>";
                         echo "<td>" . $relatorio['contIDcat'] . "</td>";
-
+                        echo "<tr>";
                       }
                       ?>
                   </tbody>

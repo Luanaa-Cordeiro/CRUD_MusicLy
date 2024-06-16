@@ -130,7 +130,7 @@ if(!isset($_SESSION["id_info"])){
                   <thead class="">
                     <tr>
                       <th style="background-color:#66276A; color:white;">Artista</th>
-                      <th style="background-color:#66276A; color:white;">Quantidade</th>
+                      <th style="background-color:#66276A; color:white;">Quantidade de músicas</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -139,7 +139,7 @@ if(!isset($_SESSION["id_info"])){
                         echo "<tr>";
                         echo "<td>" . $relatorio['Artista'] . "</td>";
                         echo "<td>" . $relatorio['contIDcat'] . "</td>";
-
+                        echo "<tr>";
                       }
                       ?>
                   </tbody>
