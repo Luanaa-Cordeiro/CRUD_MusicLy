@@ -19,6 +19,40 @@ if(!isset($_SESSION["id_info"])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Gênero', 'Quantidade'],
+                <?php
+                    $sql = "SELECT g.nome AS Genero, COUNT(m.id_musica) AS contIDcat
+                            FROM musicas AS m
+                            JOIN genero AS g ON m.id_genero = g.id_genero
+                            GROUP BY g.id_genero
+                            ORDER BY contIDcat DESC
+                            LIMIT 3";
+                    $resultado = $conn->prepare($sql);
+                    $resultado->execute();
+                    $relatorios = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($relatorios as $relatorio){
+                        echo "['" . $relatorio['Genero'] . "', " . $relatorio['contIDcat'] . "],";
+                    }
+                ?>
+            ]);
+
+            var options = {
+                is3D: false,
+                pieHole: 0.0
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 <body>
 
@@ -50,7 +84,7 @@ if(!isset($_SESSION["id_info"])){
                             <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link active">Gênero</a>
+                            <a href="relatorioGenero.php" class="sidebar-link active">Gênero</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
@@ -110,47 +144,30 @@ if(!isset($_SESSION["id_info"])){
                 </div>
             </nav>
 
-
-
-<div class="tabela">
-            <div class="">
-              <div class="titulo">
-                
-              <?php
-              $sql = "SELECT * from relatorioGenero where contIDcat = (
-                SELECT count(m.id_musica) as contIDcat from musicas as m join genero as g on m.id_genero = g.id_genero group by g.id_genero order by contIDcat desc limit 1)";
+            <?php
+              $sql = "SELECT * from testeRelatorio where contIDcat = (
+                SELECT count(m.id_musica) as contIDcat from musicas as m join artista as ar on m.id_artista = ar.id_artista group by ar.id_artista order by contIDcat desc limit 1)";
                 $resultado = $conn->prepare($sql);
                 $resultado->execute();
-                $relatGeneros = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($relatGeneros) > 0){
+                $relatorios = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                if(count( $relatorios) > 0){
                 ?>
-                <h1>Gênero com mais músicas!</h1>
-                <a href="relatorioGeneroGraf.php"><button class="btn adicionar">Gráfico</button></a>
-                </div>
-                <table class="table table-responsive table-striped table-hover">
-                  <thead class="">
-                    <tr>
-                      <th style="background-color:#66276A; color:white;">Gênero</th>
-                      <th style="background-color:#66276A; color:white;">Quantidade</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <?php
-                      foreach($relatGeneros as  $relatGenero){
-                        echo "<tr>";
-                        echo "<td>" . $relatGenero['Gênero'] . "</td>";
-                        echo "<td>" . $relatGenero['contIDcat'] . "</td>";
 
-                      }
-                      ?>
-                  </tbody>
-                </table>
-                <?php
+            <div class="main_grafico">
+            <h1>Gênero com mais músicas!</h1>
+                <div class="shadow grafico_pizza">
+                    <div id="piechart"></div>
+                </div>
+                <div id="voltar">
+                <a href="relatorioGenero.php"><button>Voltar</button></a>
+                </div>
+            </div>
+    <?php
         } else{
             echo"<div class='main_vazio'>";
             echo"<div class='vazio'>";
             echo"<div class='elementos_vazios'>";
-            echo "<h1>Gênero com mais músicas</h1>
+            echo "<h1>Artista com mais músicas</h1>
             <button class='btn botao_vazio'><a href='formMusica.php'>Adicionar</a></button>";
             echo"</div>";
             echo "<h2>Você não tem nenhuma música cadastrada!</h2>";
@@ -158,13 +175,11 @@ if(!isset($_SESSION["id_info"])){
             echo"<div>";
         }
         ?>
-              </div>
-            </div>
-        </div>
-    </div>
-</div>
+    
 
-<footer class="footer">
+
+
+    <footer class="footer">
                                     <a class="footer_item" href="../index.php">MusicLy</a>
                                     <a class="footer_item" href="./contato.php">Contato</a>
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
@@ -172,8 +187,9 @@ if(!isset($_SESSION["id_info"])){
             </footer>
         </div>
     </div>
- 
 
+    
+ 
     <div class="modal fade" id="modalSair" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -191,7 +207,6 @@ if(!isset($_SESSION["id_info"])){
     </div>
   </div>
 </div>
- 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

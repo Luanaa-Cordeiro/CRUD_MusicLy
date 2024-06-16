@@ -54,6 +54,9 @@ if(!isset($_SESSION["id_info"])){
                         <li class="sidebar-item">
                             <a href="./relatorioGenero.php" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -119,31 +122,10 @@ if(!isset($_SESSION["id_info"])){
             </div>
 
             <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
                                     <a class="footer_item" href="../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div>
@@ -159,8 +141,8 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

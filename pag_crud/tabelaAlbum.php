@@ -50,6 +50,9 @@ if(!isset($_SESSION["id_info"])){
                         <li class="sidebar-item">
                             <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -66,7 +69,7 @@ if(!isset($_SESSION["id_info"])){
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaAlbum.php" class="sidebar-link">
+                    <a href="tabelaAlbum.php" class="sidebar-link active">
                         <i class="lni lni-book"></i>
                         <span>Álbuns</span>
                     </a>
@@ -119,13 +122,13 @@ if(!isset($_SESSION["id_info"])){
                 ?>
 
                 <h1>Álbuns</h1>
-                <button class="btn adicionar"><a href="formAlbum.php">Adicionar</a></button>
+                <a href="formAlbum.php"><button class="btn adicionar">Adicionar</button></a>
                 </div>
                 <?php
                     if(isset($_GET['delete'])) {
                       echo '<div class="alerta alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um álbum foi deletada.
+                      <strong>Sucesso!</strong> Um álbum foi deletado.
                       </div>
                       ';
                     } elseif(isset($_GET['adicionado'])) {
@@ -140,7 +143,13 @@ if(!isset($_SESSION["id_info"])){
                       <strong>Sucesso!</strong> Um álbum foi atualizado.
                       </div>
                       ';
-                    }  
+                    } elseif(isset($_GET['algo'])){
+                      echo '<div class="alerta alert-danger alert alert-dismissible">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      <strong>Erro!</strong> Algo não foi processado corretamente.
+                      </div>
+                      ';
+                    }
                   ?>
 
                   <div class="table-wrapper">
@@ -168,7 +177,7 @@ if(!isset($_SESSION["id_info"])){
                         data-bs-target='#modalDeletar" . $album['id_album'] . "'>Deletar</button>";
 
                         echo "
-                        <form id='form_atualizar' method ='post' action='./atualizar/receberValoresAlb.php'>
+                        <form id='form_atualizar' method ='get' action='./atualizar/receberValoresAlb.php'>
                         <input type='hidden' name='id' value='" . $album['id_album'] . "'/>
                         <input type='hidden' name='nome' value='" . $album['nome'] . "'/>
                         <input type='hidden' name='data' value='" . $album['Lançamento'] . "'/>
@@ -188,7 +197,7 @@ if(!isset($_SESSION["id_info"])){
             echo"<div class='vazio'>";
             echo"<div class='elementos_vazios'>";
             echo "<h1>Álbuns</h1>
-            <button class='btn botao_vazio'><a href='formAlbum.php'>Adicionar</a></button>";
+            <a href='formAlbum.php'><button class='btn botao_vazio'>Adicionar</button></a>";
             echo"</div>";
             echo "<h2>Você não tem nenhum álbum cadastrado!</h2>";
             echo"</div>";
@@ -202,32 +211,11 @@ if(!isset($_SESSION["id_info"])){
 </div>
 </div>
 
-<footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                            <a class="footer_item" href="../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
+          <footer class="footer">
+                                    <a class="footer_item" href="../index.php">MusicLy</a>
                                     <a class="footer_item" href="./contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div>
@@ -249,6 +237,7 @@ if(!isset($_SESSION["id_info"])){
     <span>Deseja realmente excluir esse álbum?</span>
       </div>
       <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button id="botao_modal" type="submit" class="btn btn-primary">Excluir</button>
         </form>
       </div>
@@ -268,8 +257,8 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

@@ -36,7 +36,7 @@ if(!isset($_SESSION["id_info"])){
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="index.php" class="sidebar-link">
+                    <a href="index.php" class="sidebar-link active">
                         <i class="lni lni-home"></i>
                         <span>Início</span>
                     </a>
@@ -53,6 +53,9 @@ if(!isset($_SESSION["id_info"])){
                         </li>
                         <li class="sidebar-item">
                             <a href="./pag_crud/relatorioGenero.php" class="sidebar-link">Gênero</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="./pag_crud/relatorioAlbum.php" class="sidebar-link">Álbum</a>
                         </li>
                     </ul>
                 </li>
@@ -113,7 +116,7 @@ if(!isset($_SESSION["id_info"])){
       <h1>Bem-Vindo(a) <?php echo $_SESSION["nome"];?>!</h1>
 
       <div class="cartas row">
-            <div class="card">
+            <div class="card mb-3">
               <img src="./assets/nota_musical.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Músicas</h5>
@@ -130,7 +133,7 @@ if(!isset($_SESSION["id_info"])){
               </div>
             </div>
 
-            <div class="card">
+            <div class="card mb-3">
               <img src="./assets/artista.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Artistas</h5>
@@ -147,7 +150,7 @@ if(!isset($_SESSION["id_info"])){
               </div>
             </div>
 
-            <div class="card">
+            <div class="card mb-3">
               <img src="./assets/album.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Álbuns</h5>
@@ -163,7 +166,7 @@ if(!isset($_SESSION["id_info"])){
               </div>
             </div>
 
-            <div class="card">
+            <div class="card mb-3">
               <img src="./assets/generos.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Gêneros</h5>
@@ -183,32 +186,12 @@ if(!isset($_SESSION["id_info"])){
           </div>
 
             <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
                                     <a class="footer_item" href="index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./pag_crud/contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./pag_crud/sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./pag_crud/termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
+            
         </div>
     </div>
 
@@ -223,8 +206,8 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="./login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="./login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

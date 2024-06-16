@@ -40,17 +40,20 @@ if(!isset($_SESSION["id_info"])){
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="relatorioArtista.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    <a href="relatorioArtista.php" class="sidebar-link active collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-files"></i>
                         <span>Relatórios</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
+                            <a href="relatorioArtista.php" class="sidebar-link active">Artista</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
                         </li>
                     </ul>
                 </li>
@@ -121,6 +124,7 @@ if(!isset($_SESSION["id_info"])){
                 if(count( $relatorios) > 0){
                 ?>
                 <h1>Artista com mais músicas!</h1>
+                <a href="relatorioArtistaGraf.php"><button class="btn adicionar">Gráfico</button></a>
                 </div>
                 <table class="table table-responsive table-striped table-hover">
                   <thead class="">
@@ -146,7 +150,7 @@ if(!isset($_SESSION["id_info"])){
             echo"<div class='vazio'>";
             echo"<div class='elementos_vazios'>";
             echo "<h1>Artista com mais músicas</h1>
-            <button class='btn botao_vazio'><a href='formArtista.php'>Adicionar</a></button>";
+            <button class='btn botao_vazio'><a href='formMusica.php'>Adicionar</a></button>";
             echo"</div>";
             echo "<h2>Você não tem nenhuma música cadastrada!</h2>";
             echo"</div>";
@@ -161,31 +165,10 @@ if(!isset($_SESSION["id_info"])){
 
 
 <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                            <a class="footer_item" href="../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../index.php">MusicLy</a>
                                     <a class="footer_item" href="./contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div>
@@ -203,8 +186,8 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

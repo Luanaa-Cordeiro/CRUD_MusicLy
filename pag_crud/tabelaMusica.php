@@ -50,6 +50,9 @@ if(!isset($_SESSION["id_info"])){
                         <li class="sidebar-item">
                             <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -72,7 +75,7 @@ if(!isset($_SESSION["id_info"])){
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaMusica.php" class="sidebar-link">
+                    <a href="tabelaMusica.php" class="sidebar-link active">
                         <i class="lni lni-music"></i>
                         <span>Músicas</span>
                     </a>
@@ -117,7 +120,7 @@ if(!isset($_SESSION["id_info"])){
                 ?>
 
                 <h1>Músicas</h1>
-                <button class="btn adicionar"><a href="formMusica.php">Adicionar</a></button>
+                <a href="formMusica.php"><button class="btn adicionar">Adicionar</button></a>
                 </div>
                 <?php
                     if(isset($_GET['delete'])) {
@@ -138,7 +141,13 @@ if(!isset($_SESSION["id_info"])){
                       <strong>Sucesso!</strong> Uma música foi atualizada.
                       </div>
                       ';
-                    }  
+                    } elseif(isset($_GET['algo'])){
+                      echo '<div class="alerta alert-danger alert alert-dismissible">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      <strong>Erro!</strong> Algo não foi processado corretamente.
+                      </div>
+                      ';
+                    }
                   ?>
 
                   <div class="table-wrapper">
@@ -169,7 +178,7 @@ if(!isset($_SESSION["id_info"])){
                         data-bs-target='#modalDeletar" . $musica['id_musica'] . "'>Deletar</button>";
 
                         echo "
-                        <form id='form_atualizar' method ='post' action='./atualizar/receberValoresMus.php'>
+                        <form id='form_atualizar' method ='get' action='./atualizar/receberValoresMus.php'>
                         <input type='hidden' name='id' value='" . $musica['id_musica'] . "'/>
                         <input type='hidden' name='nome' value='" . $musica['nome'] . "'/>
                         <input type='hidden' name='data' value='" . $musica['Lançamento'] . "'/>
@@ -191,7 +200,7 @@ if(!isset($_SESSION["id_info"])){
             echo"<div class='vazio'>";
             echo"<div class='elementos_vazios'>";
             echo "<h1>Músicas</h1>
-            <button class='btn botao_vazio'><a href='formMusica.php'>Adicionar</a></button>";
+            <a href='formMusica.php'><button class='btn botao_vazio'>Adicionar</button></a>";
             echo"</div>";
             echo "<h2>Você não tem nenhuma música cadastrada!</h2>";
             echo"</div>";
@@ -206,31 +215,10 @@ if(!isset($_SESSION["id_info"])){
 </div>
 
 <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                            <a class="footer_item" href="../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../index.php">MusicLy</a>
                                     <a class="footer_item" href="./contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div>
@@ -250,6 +238,7 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente excluir essa música?</span>
       </div>
       <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button id="botao_modal" type="submit" class="btn">Excluir</button>
         </form>
       </div>
@@ -269,8 +258,8 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

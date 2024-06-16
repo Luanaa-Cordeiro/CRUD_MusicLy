@@ -1,17 +1,4 @@
 <?php
-if (isset($_POST["id"]) && isset($_POST["nome"])) {
-    $id_genero = $_POST["id"];
-    $nome_genero = $_POST["nome"];
-
-} else {
-    
-    header("Location: ../tabelaGenero.php");
-    exit(); 
-    
-}
-?>
-
-<?php
 require('../../database/config_art.php');
 session_start();
 
@@ -21,6 +8,19 @@ if(!isset($_SESSION["id_info"])){
     
 }
 ?>
+
+
+<?php
+if (isset($_GET["id"]) && isset($_GET["nome"])) {
+    $id_genero = $_GET["id"];
+    $nome_genero = $_GET["nome"];
+
+} else {
+    header("Location: ../tabelaGenero.php&algo=erro");
+    
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +66,9 @@ if(!isset($_SESSION["id_info"])){
                         <li class="sidebar-item">
                             <a href="../relatorioGenero" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="../relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -76,7 +79,7 @@ if(!isset($_SESSION["id_info"])){
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="../tabelaGenero.php" class="sidebar-link">
+                    <a href="../tabelaGenero.php" class="sidebar-link active">
                         <i class="lni lni-headphone"></i>
                         <span>Gêneros</span>
                     </a>
@@ -122,16 +125,16 @@ if(!isset($_SESSION["id_info"])){
             </nav>
 
             <div id="formulario_gen">
-            <form  method ="POST" class="form_php space-y-4 md:space-y-6" action="genero.php" data-parsley-validate>
+            <form  method ="GET" class="form_php space-y-4 md:space-y-6" action="genero.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
           <div id="cadastrar_gen" class="card shadow">
           <?php
-          if(isset($_GET['nome'])){
-            echo '<div class="mb-0 alert-danger alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Esse gênero já existe!</strong> Tente novamente.
-                      </div>
-                      ';
+          if (isset($_GET['preencha'])){
+            echo '<div id="preencher" style="color:#be0505;" class="alert-danger alert alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Preencha todos os campos</strong>
+            </div>
+            ';
           }
           ?>
           <span id="titulo_form">Atualize o Gênero!</span>
@@ -150,7 +153,7 @@ if(!isset($_SESSION["id_info"])){
 
 
                 <div class="div_botao">
-                <button id="botao" type="submit" data-mdb-ripple-init class="btn mb-4">
+                <button id="botao" type="submit" data-mdb-ripple-init class="btn mb-3">
                  Salvar
                 </button>
                 </div>
@@ -166,31 +169,10 @@ if(!isset($_SESSION["id_info"])){
         </div>
 
         <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                            <a class="footer_item" href="../../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../../index.php">MusicLy</a>
                                     <a class="footer_item" href="../contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="../sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="../termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div>  
@@ -206,8 +188,8 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

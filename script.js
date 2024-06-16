@@ -31,6 +31,8 @@ var data = [{
   
   Plotly.newPlot('myDiv', data, layout);
 
+  
+
 
 //const hamBurger = document.querySelector(".toggle-btn");
 //const sidebar = document.querySelector("#sidebar");

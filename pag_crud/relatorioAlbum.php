@@ -50,10 +50,10 @@ if(!isset($_SESSION["id_info"])){
                             <a href="relatorioArtista.php" class="sidebar-link">Artista</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link active">Gênero</a>
+                            <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                            <a href="relatorioAlbum.php" class="sidebar-link active">Álbum</a>
                         </li>
                     </ul>
                 </li>
@@ -111,35 +111,34 @@ if(!isset($_SESSION["id_info"])){
             </nav>
 
 
-
-<div class="tabela">
+            <div class="tabela">
             <div class="">
               <div class="titulo">
                 
               <?php
-              $sql = "SELECT * from relatorioGenero where contIDcat = (
-                SELECT count(m.id_musica) as contIDcat from musicas as m join genero as g on m.id_genero = g.id_genero group by g.id_genero order by contIDcat desc limit 1)";
+              $sql = "SELECT* from relatorioAlbum where contIDcat = (
+            SELECT count(m.id_musica) as contIDcat from musicas as m join album as a on m.id_album = a.id_album group by a.id_album order by contIDcat desc limit 1)";
                 $resultado = $conn->prepare($sql);
                 $resultado->execute();
-                $relatGeneros = $resultado->fetchAll(PDO::FETCH_ASSOC);
-                if(count($relatGeneros) > 0){
+                $relatorios = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                if(count( $relatorios) > 0){
                 ?>
-                <h1>Gênero com mais músicas!</h1>
-                <a href="relatorioGeneroGraf.php"><button class="btn adicionar">Gráfico</button></a>
+                <h1>Álbum com mais músicas!</h1>
+                <a href="relatorioAlbumGraf.php"><button class="btn adicionar">Gráfico</button></a>
                 </div>
                 <table class="table table-responsive table-striped table-hover">
                   <thead class="">
                     <tr>
-                      <th style="background-color:#66276A; color:white;">Gênero</th>
-                      <th style="background-color:#66276A; color:white;">Quantidade</th>
+                      <th style="background-color:#66276A; color:white;">Álbum</th>
+                      <th style="background-color:#66276A; color:white;">Quantidade de músicas</th>
                     </tr>
                   </thead>
                   <tbody>
                   <?php
-                      foreach($relatGeneros as  $relatGenero){
+                      foreach($relatorios as  $relatorio){
                         echo "<tr>";
-                        echo "<td>" . $relatGenero['Gênero'] . "</td>";
-                        echo "<td>" . $relatGenero['contIDcat'] . "</td>";
+                        echo "<td>" . $relatorio['Álbum'] . "</td>";
+                        echo "<td>" . $relatorio['contIDcat'] . "</td>";
 
                       }
                       ?>
@@ -150,7 +149,7 @@ if(!isset($_SESSION["id_info"])){
             echo"<div class='main_vazio'>";
             echo"<div class='vazio'>";
             echo"<div class='elementos_vazios'>";
-            echo "<h1>Gênero com mais músicas</h1>
+            echo "<h1>Álbum com mais músicas</h1>
             <button class='btn botao_vazio'><a href='formMusica.php'>Adicionar</a></button>";
             echo"</div>";
             echo "<h2>Você não tem nenhuma música cadastrada!</h2>";
@@ -164,6 +163,7 @@ if(!isset($_SESSION["id_info"])){
     </div>
 </div>
 
+
 <footer class="footer">
                                     <a class="footer_item" href="../index.php">MusicLy</a>
                                     <a class="footer_item" href="./contato.php">Contato</a>
@@ -172,8 +172,9 @@ if(!isset($_SESSION["id_info"])){
             </footer>
         </div>
     </div>
- 
 
+    
+ 
     <div class="modal fade" id="modalSair" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -191,7 +192,6 @@ if(!isset($_SESSION["id_info"])){
     </div>
   </div>
 </div>
- 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

@@ -11,4 +11,6 @@ if(isset($_POST["id"])){
     $resultado->execute();
 
     header("Location: ../tabelaArtista.php?delete=ok");
+} else{
+    header("Location: ../tabelaArtista.php?algo=erro"); 
 }

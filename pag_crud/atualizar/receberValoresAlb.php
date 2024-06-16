@@ -8,14 +8,13 @@ if (!isset($_SESSION["id_info"])) {
 
 require('../../database/config_art.php');
 
-if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && isset($_POST["artista"])) {
-    $id_album = $_POST["id"];
-    $nome_album = $_POST["nome"];
-    $data = $_POST["data"];
-    $artista_nome = $_POST["artista"];
+if (isset($_GET["id"]) && isset($_GET["nome"]) && isset($_GET["data"]) && isset($_GET["artista"])) {
+    $id_album = $_GET["id"];
+    $nome_album = $_GET["nome"];
+    $data = $_GET["data"];
+    $artista_nome = $_GET["artista"];
 } else {
-    header("Location: ../tabelaArtista.php");
-    exit;
+    header("Location: ../tabelaAlbum.php?algo=erro");
 }
 ?>
 
@@ -63,6 +62,9 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                         <li class="sidebar-item">
                             <a href="../relatorioGenero" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="../relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -79,7 +81,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="../tabelaAlbum.php" class="sidebar-link">
+                    <a href="../tabelaAlbum.php" class="sidebar-link active">
                         <i class="lni lni-book"></i>
                         <span>Álbuns</span>
                     </a>
@@ -119,16 +121,16 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
             </nav>
 
             <div id="formulario_alb">
-            <form  method ="POST" class="form_php space-y-4 md:space-y-6" action="album.php" data-parsley-validate>
+            <form  method ="GET" class="form_php space-y-4 md:space-y-6" action="album.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
           <div id="cadastrar_alb" class="card shadow">
           <?php
-          if(isset($_GET['nome'])){
-            echo '<div id="alerta" class="mb-0 alert-danger alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Esse artista já existe!</strong> Tente novamente.
-                      </div>
-                      ';
+          if (isset($_GET['preencha'])){
+            echo '<div id="preencher" style="color:#be0505;" class="alert-danger alert alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Preencha todos os campos</strong>
+            </div>
+            ';
           }
           ?>
           <span id="titulo_form">Atualize o Álbum!</span>
@@ -161,7 +163,9 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                                     foreach ($artistas as $artista) {
                                         if($artista['nome'] == $artista_nome){
                                             $selected = 'selected';
-                                        } else{
+                                        } elseif ($artista['id_artista'] == $artista_nome){
+                                            $selected = 'selected';
+                                        } else {
                                             $selected = '';
                                         }
                                         echo "<option value='" . $artista['id_artista'] . "' $selected>" . $artista['nome'] . "</option>";
@@ -173,7 +177,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
               
             
             <div class="div_botao">
-                <button id="botao_alb" type="submit" data-mdb-ripple-init class="btn mb-4">
+                <button id="botao_alb" type="submit" data-mdb-ripple-init class="btn mb-3">
                  Adicionar
                 </button>
                 </div>
@@ -189,31 +193,10 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
         </div>
 
         <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                            <a class="footer_item" href="../../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../../index.php">MusicLy</a>
                                     <a class="footer_item" href="../contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="../sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="../termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div> 
@@ -229,8 +212,8 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@ if(isset($_POST["id"])){
     $resultado = $conn->prepare($sql);
     $resultado->bindValue(":id_album", $id_album);
     $resultado->execute();
-
     header("Location: ../tabelaAlbum.php?delete=ok");
+} else{
+    header("Location: ../tabelaAlbum.php?algo=erro"); 
 }

@@ -8,15 +8,16 @@ if (!isset($_SESSION["id_info"])) {
 
 require('../../database/config_art.php');
 
-if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && isset($_POST["artista"])) {
-    $id_musica = $_POST["id"];
-    $nome_musica = $_POST["nome"];
-    $data = $_POST["data"];
-    $artista_nome = $_POST["artista"];
-    $album_nome = $_POST["album"];
-    $genero_nome = $_POST["genero"];
+if (isset($_GET["id"]) && isset($_GET["nome"]) && isset($_GET["data"]) && isset($_GET["artista"]) && 
+isset($_GET["album"]) && isset($_GET["genero"])) {
+    $id_musica = $_GET["id"];
+    $nome_musica = $_GET["nome"];
+    $data = $_GET["data"];
+    $artista_nome = $_GET["artista"];
+    $album_nome = $_GET["album"];
+    $genero_nome = $_GET["genero"];
 } else {
-    header("Location: ../tabelaArtista.php");
+    header("Location: ../tabelaMusica.php?&algo=erro");
 }
 ?>
 
@@ -67,6 +68,9 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                         <li class="sidebar-item">
                             <a href="../relatorioGenero" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="../relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -89,7 +93,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="../tabelaMusica.php" class="sidebar-link">
+                    <a href="../tabelaMusica.php" class="sidebar-link active">
                         <i class="lni lni-music"></i>
                         <span>Músicas</span>
                     </a>
@@ -123,16 +127,16 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
             </nav>
 
             <div id="formulario_mus">
-            <form  method ="POST" class="form_php space-y-4 md:space-y-6" action="musica.php" data-parsley-validate>
+            <form  method ="GET" class="form_php space-y-4 md:space-y-6" action="musica.php" data-parsley-validate>
             <div class="col-lg-6 mb-5 mb-lg-0">
           <div id="cadastrar_mus" class="card shadow">
           <?php
-          if(isset($_GET['nome'])){
-            echo '<div class="mb-0 alert-danger alert alert-dismissible">
-                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Esse artista já existe!</strong> Tente novamente.
-                      </div>
-                      ';
+            if (isset($_GET['preencha'])){
+            echo '<div id="preencher" style="color:#be0505;" class="alert-danger alert alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Preencha todos os campos</strong>
+            </div>
+            ';
           }
           ?>
           <span id="titulo_form">Atualize a Música!</span>
@@ -156,7 +160,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
 
                 
                     <div class="artista_select">
-                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Artista</label>
+                <label for="artista" class="mb-2 fw-medium text-gray-900">Artista</label>
                         <select name="artista" id="" required>
                         <?php
                                 $sql = "SELECT * FROM artista";
@@ -167,11 +171,13 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                                     foreach ($artistas as $artista) {
                                         if($artista['nome'] == $artista_nome){
                                             $selected = 'selected';
-                                        } else{
+                                        } elseif ($artista['id_artista'] == $artista_nome){
+                                            $selected = 'selected';
+                                        }else{
                                             $selected = '';
                                         }
                                         echo "<option value='" . $artista['id_artista'] . "' $selected>" . $artista['nome'] . "</option>";
-                                    }
+                                    } 
                                 }
                                 ?>
                 </select>
@@ -179,7 +185,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
               
 
                 <div class="album_input">
-                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Álbum</label>
+                <label for="artista" class="mb-2 fw-medium text-gray-900">Álbum</label>
                         <select name="album" id="" required>
                         <?php
                                 $sql = "SELECT * FROM album";
@@ -190,7 +196,9 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                                     foreach ($albuns as $album) {
                                         if($album['nome'] == $album_nome){
                                             $selected = 'selected';
-                                        } else{
+                                        } elseif ($album['id_album'] == $album_nome){
+                                            $selected = 'selected';
+                                        } else {
                                             $selected = '';
                                         }
                                         echo "<option value='" . $album['id_album'] . "' $selected>" . $album['nome'] . "</option>";
@@ -201,7 +209,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                 </div>
                 
                 <div class="genero_input">
-                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Gênero</label>
+                <label for="artista" class="mb-2 fw-medium text-gray-900">Gênero</label>
                         <select name="genero" id="" required>
                         <?php
                                 $sql = "SELECT * FROM genero";
@@ -211,6 +219,8 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                                 if (count($generos) > 0) {
                                     foreach ($generos as  $genero) {
                                         if($genero['nome'] == $genero_nome){
+                                            $selected = 'selected';
+                                        } elseif ($genero['id_genero'] == $genero_nome){
                                             $selected = 'selected';
                                         } else{
                                             $selected = '';
@@ -223,7 +233,7 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
                 </div>
             
             <div class="div_botao">
-                <button id="botao_mus" type="submit" data-mdb-ripple-init class="btn mb-4">
+                <button id="botao_mus" type="submit" data-mdb-ripple-init class="btn mb-3">
                  Adicionar
                 </button>
                 </div>
@@ -239,31 +249,10 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
         </div>
 
         <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                            <a class="footer_item" href="../../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../../index.php">MusicLy</a>
                                     <a class="footer_item" href="../contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="../sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="../termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div> 
@@ -279,8 +268,8 @@ if (isset($_POST["id"]) && isset($_POST["nome"]) && isset($_POST["data"]) && iss
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>

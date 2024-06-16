@@ -51,6 +51,9 @@ if(!isset($_SESSION["id_info"])){
                         <li class="sidebar-item">
                             <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -67,7 +70,7 @@ if(!isset($_SESSION["id_info"])){
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaAlbum.php" class="sidebar-link">
+                    <a href="tabelaAlbum.php" class="sidebar-link active">
                         <i class="lni lni-book"></i>
                         <span>Álbuns</span>
                     </a>
@@ -112,13 +115,13 @@ if(!isset($_SESSION["id_info"])){
           <div id="cadastrar_alb" class="card shadow">
           <?php
           if(isset($_GET['nome'])){
-            echo '<div class="mb-0 alert-danger alert alert-dismissible">
+            echo '<div id="alerta" class="mb-0 alert-danger alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                       <strong>Esse álbum já existe!</strong> Tente novamente.
                       </div>
                       ';
           } elseif (isset($_GET['preencha'])){
-            echo '<div style="color:#be0505;" class="alert-danger alert alert-dismissible">
+            echo '<div id="preencher" style="color:#be0505;" class="alert-danger alert alert-dismissible">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Preencha todos os campos</strong>
             </div>
@@ -129,23 +132,23 @@ if(!isset($_SESSION["id_info"])){
 
             <div id="inputs_alb" class="card-body">
                 <div class="row">
-                  <div class="col-md-6 mb-4">
+                  <div class="col-md-6 mb-3">
                     <div data-mdb-input-init class="form-outline">
-                    <label class="form-label" for="form3Example1">Nome do álbum</label>
-                      <input placeholder="Nome" name="nome" type="text" id="form3Example1" class="form-control" required/>
+                    <label class="form-label" for="nome_album">Nome do álbum<span class="asterisco">*</span></label>
+                      <input placeholder="Nome" name="nome" type="text" id="nome_album" class="form-control" required/>
                     </div>
                   </div>
-                  <div class="col-md-6 mb-4">
+                  <div class="col-md-6 mb-3">
                     <div data-mdb-input-init class="form-outline">
-                    <label class="form-label" for="form3Example2">Data de Lançamento</label>
-                      <input name="data" type="date" id="form3Example2" class="form-control" required/>
+                    <label class="form-label" for="data_lançamento">Data de Lançamento<span class="asterisco">*</span></label>
+                      <input name="data" type="date" id="data_lançamento" class="form-control" required/>
                     </div>
                   </div>
                 </div>
 
                     <div class="artista_select">
-                <label for="artista" class="mb-2 fs-6 fw-medium text-gray-900">Artista</label>
-                        <select name="artista" id="" required>
+                <label for="artista" class="mb-2 fw-medium text-gray-900">Artista<span class="asterisco">*</span></label>
+                        <select name="artista" id="artista" required>
                         <?php
                         $sql = "SELECT * FROM artista";
                         $resultado = $conn->prepare($sql);
@@ -162,7 +165,7 @@ if(!isset($_SESSION["id_info"])){
               
             
             <div class="div_botao">
-                <button id="botao_alb" type="submit" data-mdb-ripple-init class="btn mb-4">
+                <button id="botao_alb" type="submit" data-mdb-ripple-init class="btn mb-3">
                  Adicionar
                 </button>
                 </div>
@@ -181,31 +184,10 @@ if(!isset($_SESSION["id_info"])){
         </div>
 
         <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
                                     <a class="footer_item" href="../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div>
@@ -221,8 +203,9 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn">Sair</button></a>
         
-        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
       </div>
     </div>
   </div>

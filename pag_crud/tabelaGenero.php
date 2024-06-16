@@ -50,6 +50,9 @@ if(!isset($_SESSION["id_info"])){
                         <li class="sidebar-item">
                             <a href="relatorioGenero.php" class="sidebar-link">Gênero</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="relatorioAlbum.php" class="sidebar-link">Álbum</a>
+                        </li>
                     </ul>
                 </li>
                
@@ -60,7 +63,7 @@ if(!isset($_SESSION["id_info"])){
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="tabelaGenero.php" class="sidebar-link">
+                    <a href="tabelaGenero.php" class="sidebar-link active">
                         <i class="lni lni-headphone"></i>
                         <span>Gêneros</span>
                     </a>
@@ -117,7 +120,7 @@ if(!isset($_SESSION["id_info"])){
                 ?>
 
                 <h1>Gêneros</h1>
-                <button class="btn adicionar"><a href="formGenero.php">Adicionar</a></button>
+                <a href="formGenero.php"><button class="btn adicionar">Adicionar</button></a>
                 </div>
                 <?php
                     if(isset($_GET['delete'])) {
@@ -138,7 +141,13 @@ if(!isset($_SESSION["id_info"])){
                       <strong>Sucesso!</strong> Um gênero foi atualizado.
                       </div>
                       ';
-                    }  
+                    } elseif(isset($_GET['algo'])){
+                      echo '<div class="alerta alert-danger alert alert-dismissible">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      <strong>Erro!</strong> Algo não foi processado corretamente.
+                      </div>
+                      ';
+                    } 
                   ?>
 
                   <div class="table-wrapper">
@@ -160,7 +169,7 @@ if(!isset($_SESSION["id_info"])){
                         <button type='submit' class ='btn deletar' data-bs-toggle='modal'
                         data-bs-target='#modalDeletar" . $genero['id_genero'] . "'>Deletar</button>";
                         echo "
-                        <form id='form_atualizar' method ='post' action='./atualizar/receberValoresGen.php'>
+                        <form id='form_atualizar' method ='get' action='./atualizar/receberValoresGen.php'>
                         <input type='hidden' name='id' value='" . $genero['id_genero'] . "'/>
                         <input type='hidden' name='nome' value='" . $genero['nome'] . "'/>
                         <button type='submit' class ='btn atualizar'>Atualizar</button>
@@ -178,7 +187,7 @@ if(!isset($_SESSION["id_info"])){
             echo"<div class='vazio'>";
             echo"<div class='elementos_vazios'>";
             echo "<h1>Gêneros</h1>
-            <button class='btn botao_vazio'><a href='formGenero.php'>Adicionar</a></button>";
+            <a href='formGenero.php'><button class='btn botao_vazio'>Adicionar</button></a>";
             echo"</div>";
             echo "<h2>Você não tem nenhum gênero cadastrado!</h2>";
             echo"</div>";
@@ -193,31 +202,10 @@ if(!isset($_SESSION["id_info"])){
 </div>
 
 <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-body-secondary">
-                        <div class="col-6 text-start ">
-                            <a class="text-body-secondary" href=" #">
-                               
-                            </a>
-                        </div>
-                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
-                            <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                            <a class="footer_item" href="../index.php">MusicLy</a>
-                                </li>
-                                <li class="list-inline-item">
+                                    <a class="footer_item" href="../index.php">MusicLy</a>
                                     <a class="footer_item" href="./contato.php">Contato</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./sobre.php">Sobre nós</a>
-                                </li>
-                                <li class="list-inline-item">
                                     <a class="footer_item" href="./termos.php">Termos e Condições</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </footer>
         </div>
     </div>
@@ -237,6 +225,7 @@ if(!isset($_SESSION["id_info"])){
     <span>Deseja realmente excluir esse gênero?</span>
       </div>
       <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button id="botao_modal" type="submit" class="btn btn-primary">Excluir</button>
         </form>
       </div>
@@ -256,8 +245,8 @@ if(!isset($_SESSION["id_info"])){
         <span>Deseja realmente sair?</span>
       </div>
       <div class="modal-footer">
-        
-        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sim</button></a>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="../login/php/logout.php"><button id="botao_modal" type="button" class="btn btn-primary">Sair</button></a>
       </div>
     </div>
   </div>
