@@ -1,0 +1,29 @@
+Join "Artista com mais músicas"
+create view testeRelatorio as select count(m.id_musica) as contIDcat, ar.nome as Artista
+from musicas as m
+join artista as ar on m.id_artista = ar.id_artista
+group by ar.id_artista  order by contIDcat desc;
+
+
+select * from testeRelatorio where contIDcat = (
+SELECT count(m.id_musica) as contIDcat from musicas as m join artista as ar on m.id_artista = ar.id_artista group by ar.id_artista order by contIDcat desc limit 1);
+SELECT count(m.id_musica) as contIDcat, g.nome as Gênero from musicas as m join genero as g on m.id_artista = g.id_genero group by g.id_genero order by contIDcat desc limit 1;
+
+Join "Gênero com mais músicas"
+create view relatorioGenero as select count(m.id_musica) as contIDcat, g.nome as Gênero
+from musicas as m
+join genero as g on m.id_genero = g.id_genero
+group by g.id_genero  order by contIDcat desc;
+
+select * from relatorioGenero where contIDcat = (
+SELECT count(m.id_musica) as contIDcat from musicas as m join genero as g on m.id_genero = g.id_genero group by g.id_genero order by contIDcat desc limit 1);
+
+
+Join "Álbum com mais músicas"
+create view relatorioAlbum as select count(m.id_musica) as contIDcat, a.nome as Álbum
+from musicas as m
+join album as a on m.id_album = a.id_album
+group by a.id_album  order by contIDcat desc;
+
+SELECT* from relatorioAlbum where contIDcat = (
+SELECT count(m.id_musica) as contIDcat from musicas as m join album as a on m.id_album = a.id_album group by a.id_album order by contIDcat desc limit 1);
