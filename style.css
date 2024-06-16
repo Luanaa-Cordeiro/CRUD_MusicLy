@@ -207,7 +207,6 @@ a.sidebar-link:hover:not(.active) {
 
 .footer_item.active{
     color:  #929292; 
-    margin: 15px 10px;
 }
 
 .footer_item:hover:not(.active) {
