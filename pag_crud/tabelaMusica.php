@@ -14,7 +14,8 @@ if(!isset($_SESSION["id_info"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Músicas</title>
+    <link rel="icon" href="../assets/MusicLy.ico">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
@@ -126,15 +127,13 @@ if(!isset($_SESSION["id_info"])){
                     if(isset($_GET['delete'])) {
                       echo '<div class="alerta alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Uma música foi deletada.
-                      </div>
-                      ';
+                     <strong>Sucesso!</strong> A música <b>' . $_GET["nome"] . '</b> foi deletada.
+                     </div>';
                     } elseif(isset($_GET['adicionado'])) {
-                      echo '<div  class="alerta alert-success alert alert-dismissible">
+                      echo '<div class="alerta alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Uma música foi adicionada.
-                      </div>
-                      ';
+                     <strong>Sucesso!</strong> A música <b>' . $_GET["nome"] . '</b> foi adicionada.
+                     </div>';
                     } elseif(isset($_GET['atualizado'])) {
                       echo '<div class="alerta alert-success  alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -160,7 +159,7 @@ if(!isset($_SESSION["id_info"])){
                       <th style="background-color:#66276A; color:white;">Artista</th>
                       <th style="background-color:#66276A; color:white;">Álbum</th>
                       <th style="background-color:#66276A; color:white;">Gênero</th>
-                      <th style="background-color:#66276A; color:white;"></th>
+                      <th id='ação'>Ações</th>
                     </tr>
                   </thead>
                   <tbody>

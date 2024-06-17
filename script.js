@@ -7,16 +7,18 @@ hamBurger.addEventListener("click", function () {
     if (sidebar.classList.contains("expand")) {
         localStorage.setItem("sidebarState", "expand");
     } else {
-        localStorage.setItem("sidebarState", "");
+        localStorage.removeItem("sidebarState");
     }
 });
 
-window.addEventListener("load", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const savedState = localStorage.getItem("sidebarState");
     if (savedState === "expand") {
         sidebar.classList.add("expand");
     }
 });
+
+
 
 var data = [{
     values: [19, 26, 55],
@@ -34,6 +36,7 @@ var data = [{
   
 
 
+//Navbar Aberta Padrão
 //const hamBurger = document.querySelector(".toggle-btn");
 //const sidebar = document.querySelector("#sidebar");
 

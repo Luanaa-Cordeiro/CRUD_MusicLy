@@ -22,7 +22,8 @@ if (isset($_GET["id"]) && isset($_GET["nome"]) && isset($_GET["data"]) && isset(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Atualizar Álbuns</title>
+    <link rel="icon" href="../../assets/MusicLy.ico">
     <link rel="stylesheet" href="../.././node_modules/parsleyjs/src/parsley.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -181,7 +182,7 @@ if (isset($_GET["id"]) && isset($_GET["nome"]) && isset($_GET["data"]) && isset(
             
             <div class="div_botao">
                 <button id="botao_alb" type="submit" data-mdb-ripple-init class="btn mb-3">
-                 Adicionar
+                Atualizar
                 </button>
                 </div>
                 <div id="voltar">

@@ -13,7 +13,8 @@ if(!isset($_SESSION["id_info"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Adicionar Álbuns</title>
+    <link rel="icon" href="../assets/MusicLy.ico">
     <link rel="stylesheet" href=".././node_modules/parsleyjs/src/parsley.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -149,6 +150,7 @@ if(!isset($_SESSION["id_info"])){
                     <div class="artista_select">
                 <label for="artista" class="mb-2 fw-medium text-gray-900">Artista<span class="asterisco">*</span></label>
                         <select name="artista" id="artista" required>
+                        <option disabled selected hidden>Selecione um artista</option>
                         <?php
                         $sql = "SELECT * FROM artista";
                         $resultado = $conn->prepare($sql);

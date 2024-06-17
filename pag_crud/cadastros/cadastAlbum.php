@@ -21,7 +21,7 @@ if(!empty($nome) && !empty($data) && !empty($artista)){
     $resultado -> bindValue(':data_lanc',$data);
     $resultado -> bindValue(':id_artista',$artista);
     $resultado->execute();
-    header("Location: ../tabelaAlbum.php?adicionado=ok");
+    header("Location: ../tabelaAlbum.php?adicionado=ok&nome=$nome");
     }
 
 } else {

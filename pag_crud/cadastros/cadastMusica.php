@@ -24,7 +24,7 @@ if(!empty($nome) && !empty($data) && !empty($artista) && !empty($genero) && !emp
         $resultado -> bindValue(':genero',$genero);
         $resultado -> bindValue(':album',$album);
         $resultado->execute();
-        header("Location: ../tabelaMusica.php?adicionado=ok");
+        header("Location: ../tabelaMusica.php?adicionado=ok&nome=$nome");
     }
 
 } else{

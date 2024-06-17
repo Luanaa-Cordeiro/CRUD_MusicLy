@@ -57,7 +57,7 @@
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="formCheck" onclick="show()">
                         <label for="formCheck" class="form-check-label text-secondary"><small>Exibir senha</small></label>
-                        <small><a style="color: #66276A;" id = "senha" href="#" class="forgot_senha">Esqueceu a senha?</a></small>
+                        <small><a style="color: #66276A;" id ="senha" href="#" class="forgot_senha">Esqueceu a senha?</a></small>
                     </div>
 
                 </div>

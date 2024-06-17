@@ -17,7 +17,8 @@ if(!isset($_SESSION["id_info"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar With Bootstrap</title>
+    <title>Artistas</title>
+    <link rel="icon" href="../assets/MusicLy.ico">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -133,15 +134,13 @@ if(!isset($_SESSION["id_info"])){
                     if(isset($_GET['delete'])) {
                       echo '<div class="alerta alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um artista foi deletado.
-                      </div>
-                      ';
+                     <strong>Sucesso!</strong> O artista <b>' . $_GET["nome"] . '</b> foi deletado.
+                     </div>';
                     } elseif(isset($_GET['adicionado'])) {
-                      echo '<div  class="alerta alert-success alert alert-dismissible">
+                      echo '<div class="alerta alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                      <strong>Sucesso!</strong> Um artista foi adicionado.
-                      </div>
-                      ';
+                     <strong>Sucesso!</strong> O artista <b>' . $_GET["nome"] . '</b> foi adicionado.
+                     </div>';
                     } elseif(isset($_GET['atualizado'])) {
                       echo '<div class="alerta alert-success alert alert-dismissible">
                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -163,7 +162,7 @@ if(!isset($_SESSION["id_info"])){
                     <tr>
                       <th style="background-color:#66276A; color:white;">Id</th>
                       <th style="background-color:#66276A; color:white;">Nome</th>
-                      <th style="background-color:#66276A; color:white;"></th>
+                      <th id='ação'>Ações</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -172,7 +171,7 @@ if(!isset($_SESSION["id_info"])){
                         echo "<tr>";
                         echo "<td>" . $artista['id_artista'] . "</td>";
                         echo "<td>" . $artista['nome'] . "</td>";
-                        echo "<td id='botoes'>
+                        echo "<td class='botoes'>
                         <button type='submit' class ='btn deletar' data-bs-toggle='modal'
                         data-bs-target='#modalDeletar" . $artista['id_artista'] . "'>Deletar</button>";
                         
@@ -234,7 +233,8 @@ if(!isset($_SESSION["id_info"])){
       <form id='form_deletar' method ='post' action='./deletar/artista.php'>
         <input type='hidden' name='id' value=" <?php echo $artista['id_artista'] ?> "/>
         <input type='hidden' name='nome' value="<?php echo $artista['nome'] ?>"/>
-    <span>Deseja realmente excluir esse artista?</span>
+        <span><b>Deseja realmente excluir esse artista?</b>
+        Você apagará todas as músicas e álbuns relacionadas a ele.</span>
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

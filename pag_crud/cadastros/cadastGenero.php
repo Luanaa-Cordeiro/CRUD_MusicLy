@@ -18,7 +18,7 @@ if(!empty($nome)){
         $resultado -> bindValue(':nome',$nome);
         $resultado->execute();
         
-        header("Location: ../tabelaGenero.php?adicionado=ok");
+        header("Location: ../tabelaGenero.php?adicionado=ok&nome=$nome");
     }
 
 } else{

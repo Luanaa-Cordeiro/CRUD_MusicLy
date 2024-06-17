@@ -10,7 +10,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $resultado->bindValue(":id_genero", $id_genero);
     $resultado->execute();
 
-    header("Location: ../tabelaGenero.php?delete=ok");
+    header("Location: ../tabelaGenero.php?delete=ok&nome=$nome");
 }else{
     header("Location: ../tabelaGenero.php?algo=erro"); 
 }

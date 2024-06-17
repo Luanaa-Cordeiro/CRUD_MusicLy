@@ -18,7 +18,7 @@ if(!empty($nome)){
         $resultado -> bindValue(':nome',$nome);
         $resultado->execute();
     
-        header("Location: ../tabelaArtista.php?adicionado=ok");
+        header("Location: ../tabelaArtista.php?adicionado=ok&nome=$nome");
     }
 
 } else {

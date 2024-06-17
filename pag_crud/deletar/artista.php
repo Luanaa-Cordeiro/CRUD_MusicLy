@@ -10,7 +10,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $resultado->bindValue(":id_artista", $id_artista);
     $resultado->execute();
 
-    header("Location: ../tabelaArtista.php?delete=ok");
+    header("Location: ../tabelaArtista.php?delete=ok&nome=$nome");
 } else{
     header("Location: ../tabelaArtista.php?algo=erro"); 
 }

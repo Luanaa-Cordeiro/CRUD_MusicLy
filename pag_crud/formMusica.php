@@ -13,7 +13,8 @@ if(!isset($_SESSION["id_info"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Adicionar Músicas</title>
+    <link rel="icon" href="../assets/MusicLy.ico">
     <link rel="stylesheet" href=".././node_modules/parsleyjs/src/parsley.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -152,6 +153,7 @@ if(!isset($_SESSION["id_info"])){
                     <div class="artista_select">
                 <label for="artista" class="mb-2 fw-medium text-gray-900">Artista<span class="asterisco">*</span></label>
                         <select name="artista" id="artista" required>
+                        <option disabled selected hidden>Selecione um artista</option>
                         <?php
                         $sql = "SELECT * FROM artista";
                         $resultado = $conn->prepare($sql);
@@ -170,6 +172,7 @@ if(!isset($_SESSION["id_info"])){
                 <div class="album_input">
                 <label for="album" class="mb-2 fw-medium text-gray-900">Álbum<span class="asterisco">*</span></label>
                         <select name="album" id="album" required>
+                        <option disabled selected hidden>Selecione um álbum</option>
                         <?php
                         $sql = "SELECT * FROM album";
                         $resultado = $conn->prepare($sql);
@@ -187,6 +190,7 @@ if(!isset($_SESSION["id_info"])){
                 <div class="genero_input">
                 <label for="genero" class="mb-2 fw-medium text-gray-900">Gênero<span class="asterisco">*</span></label>
                         <select name="genero" id="genero" required>
+                        <option disabled selected hidden>Selecione um gênero</option>
                         <?php
                         $sql = "SELECT * FROM genero";
                         $resultado = $conn->prepare($sql);

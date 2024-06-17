@@ -7,8 +7,8 @@ if(isset($_POST["usuario"]) && isset($_POST["senha"]) && !empty($_POST["usuario"
 
             $sql = "SELECT * FROM infos WHERE usuario = :usuario AND senha = :senha";
             $resultado = $conn->prepare($sql);
-            $resultado -> bindValue('usuario',$usuario);
-            $resultado -> bindValue('senha',$senha);
+            $resultado -> bindValue(':usuario',$usuario);
+            $resultado -> bindValue(':senha',$senha);
             $resultado -> execute();
 
             if($resultado->rowCount() > 0){

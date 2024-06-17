@@ -14,7 +14,8 @@ if(!isset($_SESSION["id_info"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Relatório Artista</title>
+    <link rel="icon" href="../assets/MusicLy.ico">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -150,7 +151,7 @@ if(!isset($_SESSION["id_info"])){
             echo"<div class='vazio'>";
             echo"<div class='elementos_vazios'>";
             echo "<h1>Artista com mais músicas</h1>
-            <button class='btn botao_vazio'><a href='formMusica.php'>Adicionar</a></button>";
+            <a href='formMusica.php'><button class='btn botao_vazio'>Adicionar</button></a>";
             echo"</div>";
             echo "<h2>Você não tem nenhuma música cadastrada!</h2>";
             echo"</div>";
