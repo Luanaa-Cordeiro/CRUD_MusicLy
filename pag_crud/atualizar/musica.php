@@ -17,7 +17,7 @@ if(isset($_GET["id"]) && isset($_GET["nome"]) && isset($_GET["data"]) && isset($
     $count = $stmt->fetchColumn();
     
     if($count > 0) {
-        header("Location: receberValoresMusErro.php?id=$id_musica&&nome= &&data=$data&&album=$id_album&&artista=$id_artista&&genero=$id_genero");
+        header("Location: receberValoresMusErro.php?id=$id_musica&&data=$data&&album=$id_album&&artista=$id_artista&&genero=$id_genero&&nome= ");
     } else {
         $sql = "UPDATE musicas SET nome = :nome, data_lanc = :data_lanc, id_artista = :id_artista, id_album = :id_album, id_genero = :id_genero WHERE id_musica = :id_musica";
         $resultado = $conn->prepare($sql);

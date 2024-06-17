@@ -13,7 +13,7 @@ if(isset($_GET["id"]) && isset($_GET["nome"]) && isset($_GET["data"]) && isset($
         $stmt->execute();
         $count = $stmt->fetchColumn();
         if($count > 0) {
-            header("Location: receberValoresAlbErro.php?id=$id_album&&nome= &&data=$data&&artista=$id_artista");
+            header("Location: receberValoresAlbErro.php?id=$id_album&&data=$data&&artista=$id_artista&&nome= ");
         } else {
             $sql = "UPDATE album SET nome = :nome, data_lanc = :data_lanc, id_artista = :id_artista WHERE id_album = :id_album";
             $resultado = $conn->prepare($sql);
