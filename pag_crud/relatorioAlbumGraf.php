@@ -155,7 +155,7 @@ if(!isset($_SESSION["id_info"])){
                 ?>
 
             <div class="main_grafico">
-            <h1>Álbum com mais músicas!</h1>
+            <h1>Álbuns com mais músicas!</h1>
                 <div class="shadow grafico_pizza">
                     <div id="piechart"></div>
                 </div>
