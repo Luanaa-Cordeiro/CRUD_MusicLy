@@ -9,7 +9,7 @@ if(!isset($_SESSION["id_info"])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -153,7 +153,7 @@ if(!isset($_SESSION["id_info"])){
                     <div class="artista_select">
                 <label for="artista" class="mb-2 fw-medium text-gray-900">Artista<span class="asterisco">*</span></label>
                         <select name="artista" id="artista" required>
-                        <option disabled selected hidden>Selecione um artista</option>
+                        <option disabled selected hidden>Selecione um Artista</option>
                         <?php
                         $sql = "SELECT * FROM artista";
                         $resultado = $conn->prepare($sql);
@@ -172,7 +172,7 @@ if(!isset($_SESSION["id_info"])){
                 <div class="album_input">
                 <label for="album" class="mb-2 fw-medium text-gray-900">Álbum<span class="asterisco">*</span></label>
                         <select name="album" id="album" required>
-                        <option disabled selected hidden>Selecione um álbum</option>
+                        <option disabled selected hidden>Selecione um Álbum</option>
                         <?php
                         $sql = "SELECT * FROM album";
                         $resultado = $conn->prepare($sql);
@@ -190,7 +190,7 @@ if(!isset($_SESSION["id_info"])){
                 <div class="genero_input">
                 <label for="genero" class="mb-2 fw-medium text-gray-900">Gênero<span class="asterisco">*</span></label>
                         <select name="genero" id="genero" required>
-                        <option disabled selected hidden>Selecione um gênero</option>
+                        <option disabled selected hidden>Selecione um Gênero</option>
                         <?php
                         $sql = "SELECT * FROM genero";
                         $resultado = $conn->prepare($sql);

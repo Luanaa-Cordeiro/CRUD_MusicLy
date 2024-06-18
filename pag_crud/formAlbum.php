@@ -9,7 +9,7 @@ if(!isset($_SESSION["id_info"])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -150,7 +150,7 @@ if(!isset($_SESSION["id_info"])){
                     <div class="artista_select">
                 <label for="artista" class="mb-2 fw-medium text-gray-900">Artista<span class="asterisco">*</span></label>
                         <select name="artista" id="artista" required>
-                        <option disabled selected hidden>Selecione um artista</option>
+                        <option disabled selected hidden>Selecione um Artista</option>
                         <?php
                         $sql = "SELECT * FROM artista";
                         $resultado = $conn->prepare($sql);

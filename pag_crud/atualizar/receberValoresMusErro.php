@@ -24,7 +24,7 @@ if (isset($_GET["id"]) && isset($_GET["nome"]) && isset($_GET["data"]) && isset(
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
